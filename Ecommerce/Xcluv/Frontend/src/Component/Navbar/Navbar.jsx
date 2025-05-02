@@ -46,15 +46,12 @@ const Navbar = () => {
                             userData === null ? "" :
                                 <>
                                     <li><button><i className="bi bi-person-circle"></i>  My Profile</button></li>
-                                    <li><button><i className="bi bi-box"></i>  Order</button></li>
+                                    <Link to="/orderPlaced"><li><button><i className="bi bi-box"></i>  Order</button></li></Link>
                                     <li><button><i className="bi bi-heart"></i>  Wishlist</button></li>
                                     <li><button onClick={() => onLogout()}><i className="bi bi-door-closed"></i>  Logout</button></li>
                                 </>
                         }
                     </ul>
-                </div>
-                <div className="login_sigup_profile">
-                    {/* <button onClick={() => onLogout()} > {!loginPopUp ? "Logout" : "Login"}</button> */}
                 </div>
             </div>
         </div>

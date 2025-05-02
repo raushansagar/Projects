@@ -67,7 +67,7 @@ const Cart = () => {
             <h3>Total</h3>
             <h3>₹{getTotalCartAmount() > 0 ? getTotalCartAmount() + 45 : 0}</h3>
           </div>
-          <li><Link to="/order" onClick={handleCheckout}>PROCEED TO CHECKOUT</Link></li>
+          <li><Link to={getTotalCartAmount() > 0 ? "/order" : "/shop"} onClick={handleCheckout}>PROCEED TO CHECKOUT</Link></li>
         </div>
         <div className="promocode">
           <p>If you have a promo code, Enter it here</p>

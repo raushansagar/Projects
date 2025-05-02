@@ -14,6 +14,7 @@ export const ContextProvider = (props) => {
     //Backend items
     const [product, setProduct] = useState([]);
     const [menu, setMenu] = useState([]);
+    const [order, setOrder] = useState([]);
 
 
     const [loginPopUp, setLoginPopUp] = useState(false);
@@ -26,6 +27,18 @@ export const ContextProvider = (props) => {
         setProduct(response.data.data.product);
         setMenu(response.data.data.menu);
     }
+
+
+    // Fetch orders
+    const findOrderPlaced = async () => {
+        try {
+            const response = await axios.post("/getOrderPlaced");
+            setOrder(response.data.data.order);
+        } catch (error) {
+            console.error("Error fetching orders:", error);
+        }
+    };
+
 
 
     //store currUserData 
@@ -88,12 +101,13 @@ export const ContextProvider = (props) => {
         const token = localStorage.getItem("token");
 
         if (token) {
-            
+
             //card items 
             localStorage.setItem("cartItems", JSON.stringify(cartItems));
 
-            // product and menu data fetch
+            // product order and menu data fetch
             dataFetch();
+            findOrderPlaced();
 
             // user data fetch
             userDataFetch();
@@ -171,7 +185,12 @@ export const ContextProvider = (props) => {
     });
 
 
-
+    //flter items
+    const filterOrder = Array.isArray(order) && userData && Array.isArray(userData.orders)
+        ? order.filter(item =>
+            userData.orders.includes(item._id?.toString())
+        )
+        : [];
 
 
     const contextValue = {
@@ -201,6 +220,8 @@ export const ContextProvider = (props) => {
         setUserData,
         url,
         setCartItems,
+        order,
+        filterOrder,
     }
 
 

@@ -12,6 +12,7 @@ import Order from './Component/Order/Order';
 import { StoreContext } from './StoreContext/StoreContext';
 import { useContext } from 'react';
 import { ToastContainer } from 'react-toastify';
+import CurrentOrder from './Component/CurrentOrder/CurrentOrder';
 
 function App() {
   const { loginPopUp } = useContext(StoreContext);
@@ -29,6 +30,7 @@ function App() {
         <Route path='/showItems' element={<ItemsDetails />} />
         <Route path='/cart' element={<Cart />} />
         <Route path='/order' element={<Order />} />
+        <Route path='/orderPlaced' element = {<CurrentOrder/>} />
       </Routes>
       <Footer />
       <ToastContainer />

@@ -1,181 +1,192 @@
 .Order_container {
-    margin: 100px;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 50px;
-    animation: fadeIn 0.5s;
-  }
-  
-  /* Left: Delivery Info */
-  .deliveryInfo {
-    flex: 1;
-    min-width: 300px;
-    max-width: 600px;
-    display: flex;
+  margin: 100px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 50px;
+  animation: fadeIn 0.5s;
+}
+
+/* Left: Delivery Info */
+.deliveryInfo {
+  flex: 1;
+  min-width: 300px;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.deliveryInfo h2 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #000000;
+}
+
+.deliveryInfo form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.deliveryInfo input {
+  padding: 10px;
+  font-size: 15px;
+  border: none;
+  background-color: #d7d6d668;
+  outline: none;
+  border-radius: 4px;
+}
+
+.deliveryInfo button {
+  height: 38px;
+  background-color: #96ACC0;
+  font-size: 15px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  color: white;
+}
+
+.deliveryInfo button:active {
+  background-color: #738ba1;
+}
+
+/* Right: Card Total Summary */
+.cardTotal {
+  flex: 1;
+  min-width: 250px;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.cardTotal h2 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #000000;
+}
+
+.summaryItem {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  color: gray;
+  padding: 10px 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.summaryItem.total {
+  font-weight: bold;
+  font-size: 18px;
+  color: #000;
+  border-bottom: none;
+}
+
+/* Styled Link as Button */
+.placeOrderBtn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 38px;
+  background-color: #96ACC0;
+  font-size: 15px;
+  font-weight: 500;
+  color: white;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  margin-top: 15px;
+  border-radius: 4px;
+  padding: 0 16px;
+  transition: background-color 0.2s ease;
+}
+
+.placeOrderBtn:hover {
+  background-color: #8ba3b6;
+}
+
+.placeOrderBtn:active {
+  background-color: #738ba1;
+}
+
+/* Payment Method Section */
+.paymentMethod {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.paymentMethod h3 {
+  font-size: 16px;
+  font-weight: 500;
+  color: #000000;
+  margin-bottom: 5px;
+}
+
+.paymentMethod label {
+  font-size: 15px;
+  color: #444;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.paymentMethod input[type="radio"] {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+/* Responsive Style Matching Cart */
+@media screen and (max-width: 1024px) {
+  .Order_container {
+    margin: 60px 40px;
     flex-direction: column;
-    gap: 20px;
   }
-  
-  .deliveryInfo h2 {
-    font-size: 22px;
-    font-weight: 600;
-    color: #000000;
-  }
-  
-  .deliveryInfo form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .deliveryInfo input {
-    padding: 10px;
-    font-size: 15px;
-    border: none;
-    background-color: #d7d6d668;
-    outline: none;
-    border-radius: 4px;
-  }
-  
-  .deliveryInfo button {
-    height: 38px;
-    background-color: #96ACC0;
-    font-size: 15px;
-    font-weight: 500;
-    border: none;
-    cursor: pointer;
-    border-radius: 4px;
-  }
-  
-  .deliveryInfo button:active {
-    background-color: #738ba1;
-  }
-  
-  /* Right: Card Total Summary */
+
+  .deliveryInfo,
   .cardTotal {
-    flex: 1;
-    min-width: 250px;
-    max-width: 400px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    background-color: #f5f5f5;
-    padding: 20px;
-    border-radius: 8px;
+    width: 100%;
   }
-  
-  .cardTotal h2 {
-    font-size: 22px;
-    font-weight: 600;
-    color: #000000;
+}
+
+@media screen and (max-width: 768px) {
+  .Order_container {
+    margin: 30px 20px;
   }
-  
+
+  .deliveryInfo input {
+    font-size: 14px;
+  }
+
   .summaryItem {
-    display: flex;
-    justify-content: space-between;
-    font-size: 16px;
-    color: gray;
-    padding: 10px 0;
-    border-bottom: 1px solid #ccc;
+    font-size: 15px;
   }
-  
+
   .summaryItem.total {
-    font-weight: bold;
-    font-size: 18px;
-    color: #000;
-    border-bottom: none;
-  }
-  
-  .placeOrderBtn {
-    height: 38px;
-    background-color: #96ACC0;
-    font-size: 15px;
-    font-weight: 500;
-    border: none;
-    cursor: pointer;
-    margin-top: 15px;
-    border-radius: 4px;
-  }
-  
-  .placeOrderBtn:active {
-    background-color: #738ba1;
-  }
-
-
-  .paymentMethod {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .paymentMethod h3 {
     font-size: 16px;
-    font-weight: 500;
-    color: #000000;
-    margin-bottom: 5px;
   }
-  
-  .paymentMethod label {
-    font-size: 15px;
-    color: #444;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
+
+  .deliveryInfo button,
+  .placeOrderBtn {
+    font-size: 14px;
   }
-  
-  .paymentMethod input[type="radio"] {
-    transform: scale(1.2);
-    cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
   }
-  
-  
-  /* Responsive Style Matching Cart */
-  @media screen and (max-width: 1024px) {
-    .Order_container {
-      margin: 60px 40px;
-      flex-direction: column;
-    }
-  
-    .deliveryInfo,
-    .cardTotal {
-      width: 100%;
-    }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
   }
-  
-  @media screen and (max-width: 768px) {
-    .Order_container {
-      margin: 30px 20px;
-    }
-  
-    .deliveryInfo input {
-      font-size: 14px;
-    }
-  
-    .summaryItem {
-      font-size: 15px;
-    }
-  
-    .summaryItem.total {
-      font-size: 16px;
-    }
-  
-    .deliveryInfo button,
-    .placeOrderBtn {
-      font-size: 14px;
-    }
-  }
-  
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(15px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0px);
-    }
-  }
-  
+}
