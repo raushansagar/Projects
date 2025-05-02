@@ -1,0 +1,121 @@
+.discountContainers {
+  padding: 30px;
+  background-color: #d9d9d9; 
+  width: 100%; 
+  box-sizing: border-box;
+}
+
+.discountContainers h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.discount_Items {
+  width: 99%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; 
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(to bottom right, #f0ba68, #e49423);
+  border-radius: 15px;
+  margin: 20px auto;
+  gap: 20px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+
+.discount_Items img {
+  width: 100%;
+  max-width: 321px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px;
+  flex: 1 1 300px;
+  display: block;
+}
+
+
+.discountData_Items {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 300px;
+  padding: 20px;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  gap: 10px;
+}
+
+.discountData_Items h3 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.discountData_Items p {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #000;
+}
+
+
+.discount_Items button {
+  height: 42px;
+  width: 110px;
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(197, 197, 18, 0.85);
+  background-color: black;
+  border-radius: 12px;
+  margin-top: 20px;
+  box-shadow: 0px 0px 4px black;
+  border: none;
+  cursor: pointer;
+}
+
+.discount_Items button:hover {
+  background-color: #333;
+}
+
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+
+@media screen and (max-width: 768px) {
+  .discount_Items {
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    height: auto;
+  }
+
+  .discount_Items img {
+    width: 90%;
+    max-width: 90%;
+    height: auto;
+    border-radius: 15px;
+    align-self: center;
+  }
+
+  .discountData_Items {
+    max-width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: center;
+  }
+
+  .discountData_Items h3 {
+    font-size: 22px;
+  }
+
+  .discountData_Items p {
+    font-size: 15px;
+  }
+}

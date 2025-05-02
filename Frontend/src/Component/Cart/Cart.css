@@ -1,0 +1,135 @@
+.cart {
+  padding: 20px;
+  margin-top: 15px;
+}
+
+.cart_items_title {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cart_items_title p {
+  cursor: pointer;
+  font-weight: 550;
+  text-align: center;
+  color: gray;
+}
+
+.cart_items_items i {
+  font-size: 25px;
+}
+
+.cart_top {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 1fr 1fr 0.5fr;
+  font-weight: 600;
+  text-align: center;
+}
+
+.cart_items_items {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 1fr 1fr 0.5fr;
+  align-items: center;
+  padding: 10px 0;
+  text-align: center; /* Ensure text is centered */
+}
+
+.cart_items_items img {
+  height: 60px;
+  width: auto;
+  margin: 0 auto;
+}
+
+.cart_items_items p {
+  margin: 0;
+  text-align: center;
+}
+
+.cart_bottom {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.total_cart {
+  background-color: #f7f7f7;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+  margin-top: 20px;
+}
+
+.total_cart_details {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+.total_cart h3,
+.total_cart h4 {
+  margin: 0;
+  font-weight: bold;
+}
+
+.promocode {
+  width: 100%;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.promocode input {
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  outline: none;
+}
+
+.promocode button {
+  padding: 10px;
+  background-color: #96ACC0;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.promocode button:hover {
+  background-color: #738ba1;
+}
+
+.empty-cart-message {
+  color: red;
+  text-align: center;
+  font-weight: bold;
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+.cart_bottom li {
+  list-style-type: none;
+}
+
+.cart_bottom li a {
+  padding: 10px 20px;
+  background-color: #96ACC0;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+
+.cart_bottom li a:hover {
+  background-color: #738ba1;
+}

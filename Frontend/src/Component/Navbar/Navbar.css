@@ -1,0 +1,176 @@
+.Navbar_container {
+    height: 72px;
+    width: 100%;
+    background-color: #96ACC0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 46px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1000;
+}
+
+
+.Navbar_left a {
+    text-decoration: none;
+    color: #000000;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+
+.Navbar_center {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.Navbar_center li {
+    height: 32px;
+    width: 121px;
+    border-radius: 12px;
+    list-style: none;
+    background-color: #E7E7E7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.Navbar_center li:hover {
+    background-color: #FFFFFF;
+}
+
+.Navbar_center a {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    padding: 4px;
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+
+.Navbar_right {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+
+.Navbar_cart i{
+    font-size: 28px;
+    font-weight: 600;
+    cursor: pointer;
+    color: #000000;
+}
+
+.login_sigup_profile button {
+    height: 38px;
+    width: 90px;
+    background-color: #000000;
+    color: wheat;
+    border-radius: 11px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+
+.hamburger {
+    display: none;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+
+
+.Navbar_Profile {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .Navbar_Profile > button {
+    height: fit-content;
+    width: fit-content;
+    padding: 12px 15px;
+    background-color: #000000;;
+    color: wheat;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    border: none;
+  }
+
+  .Navbar_Profile > i{
+    font-size: 30px;
+  }
+  
+  .dropdown_menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #96ACC0;
+    min-width: 160px;
+    border-radius: 6px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    display: none;
+    flex-direction: column;
+    padding: 8px 0;
+    z-index: 999;
+  }
+  
+  .dropdown_menu li {
+    list-style: none;
+    width: 100%;
+  }
+  
+  .dropdown_menu li button {
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    padding: 10px 16px;
+    font-size: 15px;
+    cursor: pointer;
+    color: black;
+    font-weight: 500;
+  }
+  
+  .dropdown_menu li button:hover {
+    background-color: #e7e7e791;
+  }
+  
+  /* Show dropdown on hover */
+  .Navbar_Profile:hover .dropdown_menu {
+    display: flex;
+  }
+  
+
+
+@media screen and (max-width: 768px) {
+    .Navbar_center {
+        display: none;
+        flex-direction: column;
+        gap: 15px;
+        background-color: #96ACC0;
+        position: absolute;
+        top: 72px;
+        left: 0;
+        width: 100%;
+        padding: 20px;
+    }
+
+    .Navbar_center.active,
+    .Navbar_right.active {
+        display: flex;
+    }
+
+    .hamburger {
+        display: block;
+        color: #000;
+    }
+}

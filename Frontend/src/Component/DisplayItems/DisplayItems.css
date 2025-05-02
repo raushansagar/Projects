@@ -1,0 +1,176 @@
+.Display {
+    height: auto;
+    width: auto;
+    background-color: #d9d9d9d9;
+  }
+  
+  .Display_Items {
+    position: relative;
+    height: auto;
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 20px;
+    padding: 20px 15px;
+  }
+  
+  .Display h2 {
+    text-align: center;
+    font-size: 25px;
+    font-weight: 600;
+    padding: 20px 20px;
+    color: #222324fa;
+  }
+  
+  .logo {
+    font-size: 26px;
+    color: #063f75dd;
+  }
+  
+  .Display_Filter {
+    height: auto;
+    width: 350px;
+    background-color: white;
+    border-radius: 11px;
+    align-content: start;
+    padding: 20px 20px;
+  }
+  
+  .Display_Filter h3 {
+    font-size: 25px;
+    font-weight: 600;
+    padding: 5px;
+  }
+  
+  .Display_All_Items {
+    position: relative;
+    height: 720px;
+    width: 100%;
+    background-color: white;
+    border-radius: 11px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 15px;
+    overflow-y: auto;
+    padding: 10px 15px;
+  }
+  
+  /* Hide scrollbar (optional) */
+  .Display_All_Items::-webkit-scrollbar {
+    width: 0px;
+    display: none;
+  }
+  
+  .Display_All_Items {
+    scrollbar-width: none;
+  }
+  
+  .Display_All_Items::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .box {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .Category {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
+  
+  .Category button {
+    position: relative;
+    margin: 10px 30px;
+    height: 34px;
+    background-color: #000000;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    border-radius: 11px;
+    cursor: pointer;
+  }
+  
+  .new_arrival {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+  }
+  
+  .new_arrival h3 {
+    text-align: center;
+    font-size: 22px;
+    margin-bottom: 5px;
+    font-weight: 600;
+  }
+  
+  .new_arrival button {
+    position: relative;
+    margin: 10px 30px;
+    height: 34px;
+    background-color: #000000;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    border-radius: 11px;
+    cursor: pointer;
+  }
+  
+  .discount {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+  }
+  
+  .discount h3 {
+    text-align: center;
+    font-size: 25px;
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+  
+  .notFount {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .notFount img {
+    margin: 30px;
+    position: relative;
+    height: 90%;
+    width: 80%;
+    object-fit: cover;
+  }
+  
+
+  @media screen and (max-width: 768px) {
+    .Display_Items {
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+    }
+  
+
+    .Display_Filter {
+      display: none;
+    }
+  
+    .Display_All_Items {
+      height: auto;
+      justify-content: center;
+      padding: 10px;
+    }
+  
+    .notFount img {
+      width: 100%;
+      height: auto;
+    }
+  }
+  

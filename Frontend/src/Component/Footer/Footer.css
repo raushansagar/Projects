@@ -1,0 +1,66 @@
+
+.Footer_container{
+    height: auto;
+    width: auto;
+    padding: 0px 20px;
+    background-color: #96ACC0;
+}
+
+.copy_right{
+    text-align: center;
+    padding: 10px;
+}
+
+.Footer_container hr{
+    height: auto;
+    width: auto;
+}
+
+
+.Footer{
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 38px;
+}
+
+
+.Center{
+    text-align: start;
+    display: flex;
+    flex-direction: row;
+    gap:25px;
+}
+
+.follow{
+    list-style: none;
+    
+}
+.follow a{
+    text-decoration: none;
+    color: #000000;
+    cursor: pointer;
+}
+
+.company p{
+    cursor: pointer;
+}
+
+.Right{
+    align-items: center;
+    text-align: center;
+}
+
+
+.trust{
+    height: auto;
+    width: fit-content;
+}
+
+.trust h4{
+    font-size: 19px;
+    font-weight: 700;
+}
