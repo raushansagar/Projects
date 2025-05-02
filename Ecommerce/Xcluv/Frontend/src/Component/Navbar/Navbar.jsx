@@ -27,7 +27,7 @@ const Navbar = () => {
     return (
         <div className='Navbar_container'>
             <div className='Navbar_left'>
-                <Link to="/"><h2>XCLUV <span>🛍️</span></h2></Link>
+                <Link to="/"><li>XCLUV <span>🛍️</span></li></Link>
             </div>
             <div className='Navbar_center'>
                 <li><Link to="/">Home</Link></li>
