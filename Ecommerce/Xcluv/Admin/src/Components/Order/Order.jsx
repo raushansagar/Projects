@@ -1,101 +1,148 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import axios from '../../axios.js';
+import { StoreContext } from '../../StoreContext.jsx';
 import './Order.css';
 
+const STATUS_OPTIONS = [
+  { value: 'Processing', label: 'Processing' },
+  { value: 'Shipped', label: 'Shipped' },
+  { value: 'Delivered', label: 'Delivered' },
+  { value: 'Cancelled', label: 'Cancelled' },
+];
+
 const Order = () => {
-  const [orders, setOrders] = useState([]); 
-  const [error, setError] = useState(null); 
+  const { product, order } = useContext(StoreContext);
 
-
-  console.log(orders);
-
-
-  // Fetch orders from the API
-  const fetchOrders = async () => {
+  const handleStatusUpdate = async (orderId, newStatus) => {
     try {
-      const response = await axios.post('/getOrderPlaced');
-      setOrders(response.data.data.order); // Set the fetched orders to state
-      setError(null); // Reset any previous error
-    } catch (error) {
-      console.log(error);
-      setError('Error fetching order data'); // Set error message if failed
-    }
-  };
+      await axios.post(`/orderStatus`, 
+        {
+        orderId: orderId,
+        status: newStatus,
+      });
 
-
-
-  // Handle status change for an order
-  const handleStatusChange = async (orderId, newStatus) => {
-    try {
-      const response = await axios.put(`/order/${orderId}/status`, { status: newStatus });
+      alert(`Status for order ${orderId} updated to ${newStatus}`);
+    } catch (err) {
       
-      // Update the order in the state with the new status
-      setOrders((prevOrders) =>
-        prevOrders.map((order) =>
-          order._id === orderId ? { ...order, orderStatus: newStatus } : order
-        )
-      );
-    } catch (error) {
-      console.log(error);
-      alert('Error updating order status');
+      console.error('Status update error:', err);
+      alert('Failed to update order status');
     }
   };
-
-
 
   return (
-    <div>
-      <button onClick={fetchOrders}>Get Order Placed Items</button>
+    <div className="order-management">
+      <header className="order-header">
+        <h1>Order Management Dashboard</h1>
+      </header>
 
-      {error && <p style={{ color: 'red' }}>{error}</p>} {/* Display error message */}
-
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
-        {orders.map((order) => (
-          <div
-            key={order._id}
-            style={{
-              border: '1px solid #ccc',
-              borderRadius: '10px',
-              padding: '20px',
-              width: '300px',
-              boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-            }}
-          >
-            <h3>Order ID: {order._id}</h3>
-            <p><strong>Full Name:</strong> {order.address.fullName}</p>
-            <p><strong>Phone:</strong> {order.address.phone}</p>
-            <p><strong>City:</strong> {order.address.city}</p>
-            <p><strong>Country:</strong> {order.address.country}</p>
-            <p><strong>Amount:</strong> ₹{order.amount}</p>
-            <p><strong>Order Status:</strong> {order.orderStatus}</p>
-            <p><strong>Created At:</strong> {new Date(order.createdAt).toLocaleString()}</p>
-
-            <h4>Items:</h4>
-            <ul>
-              {order.items.map((item, index) => (
-                <li key={index}>
-                  <strong>{item.name}</strong> - ₹{item.price} x {item.quantity}
-                </li>
-              ))}
-            </ul>
-
-            <div>
-              <label htmlFor={`status-${order._id}`}>Change Status: </label>
-              <select
-                id={`status-${order._id}`}
-                value={order.orderStatus}
-                onChange={(e) => handleStatusChange(order._id, e.target.value)}
-              >
-                <option value="Processing">Processing</option>
-                <option value="Shipped">Shipped</option>
-                <option value="Delivered">Delivered</option>
-                <option value="Cancelled">Cancelled</option>
-              </select>
-            </div>
-          </div>
+      <div className="orders-grid">
+        {order.map((orderItem) => (
+          <OrderCard
+            key={orderItem._id}
+            order={orderItem}
+            products={product}
+            onStatusChange={handleStatusUpdate}
+          />
         ))}
       </div>
     </div>
+  );
+};
+
+const OrderCard = ({ order, products, onStatusChange }) => {
+  const [selectedStatus, setSelectedStatus] = useState(order.orderStatus);
+
+  const formattedDate = new Date(order.createdAt).toLocaleDateString('en-IN', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+
+  const getProductDetails = (productId) => {
+    return products.find((p) => p._id === productId) || {};
+  };
+
+  return (
+    <article className="order-card">
+      <div className="order-meta">
+        <h3>Order #{order._id.slice(-6).toUpperCase()}</h3>
+        <time dateTime={order.createdAt}>{formattedDate}</time>
+      </div>
+
+      <div className="order-details">
+        <section className="customer-info">
+          <h4>Customer Details</h4>
+          <p>{order.address.fullName}</p>
+          <p>{order.address.phone}</p>
+          <p>{order.address.city}, {order.address.country}</p>
+        </section>
+
+        <section className="order-summary">
+          <h4>Order Summary</h4>
+          <p className="order-amount">Total: ₹{order.amount.toFixed(2)}</p>
+          <div className="status-indicator">
+            Current Status: <span>{order.orderStatus}</span>
+          </div>
+        </section>
+      </div>
+
+      <section className="order-items">
+        <h4>Items ({order.items.length})</h4>
+        <ul>
+          {order.items.map((item, index) => {
+            const productInfo = getProductDetails(item.productId);
+            const productName = productInfo.name || item.name || 'Unnamed Product';
+            const totalItemPrice = item.price * item.quantity;
+
+            return (
+              <li key={index} className="order-item">
+                <span className="item-name">{productName}</span>
+                <span className="item-quantity">× {item.quantity}</span>
+                <span className="item-price">₹{item.price} each</span>
+                <span className="item-total">= ₹{totalItemPrice}</span>
+              </li>
+            );
+          })}
+        </ul>
+        <div className="order-total-amount">
+          <strong>Total Amount: ₹{order.amount.toFixed(2)}</strong>
+        </div>
+      </section>
+
+      <div className="status-control">
+        <label htmlFor={`status-${order._id}`}>Update Status:</label>
+        <select
+          id={`status-${order._id}`}
+          value={selectedStatus}
+          onChange={(e) => setSelectedStatus(e.target.value)}
+          className="status-selector"
+        >
+          {STATUS_OPTIONS.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+
+        <button
+          className="update-status-btn"
+          onClick={() => onStatusChange(order._id, selectedStatus)}
+          style={{
+            marginTop: '8px',
+            padding: '5px 10px',
+            backgroundColor: '#28a745',
+            color: '#fff',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: 'pointer',
+          }}
+        >
+          Update Status
+        </button>
+      </div>
+    </article>
   );
 };
 

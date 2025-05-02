@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { upload } from '../middleware/multer.middleware.js';
-import { loginUser, logoutUser, registerUser, userData, addProduct, productData, addMenu, placeOrder, getOrder } from '../controllers/user.controlls.js';
+import { loginUser, logoutUser, registerUser, userData, addProduct, productData, addMenu, placeOrder, getOrder, changeOrderStatus } from '../controllers/user.controlls.js';
 import { verifyJWT } from '../middleware/auth.middleware.js';
 
 
@@ -54,6 +54,9 @@ router.route("/orderPlaced").post(verifyJWT, placeOrder);
 
 //get all or(der placed
 router.route("/getOrderPlaced").post(getOrder);
+
+
+router.route("/orderStatus").post(changeOrderStatus);
 
 
 

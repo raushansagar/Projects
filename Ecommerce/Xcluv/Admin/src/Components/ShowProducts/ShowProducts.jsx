@@ -1,25 +1,17 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import './ShowProducts.css';
 import axios from '../../axios.js';
+import { StoreContext } from '../../StoreContext.jsx';
+
 
 const ShowProducts = () => {
-    const [product, setProduct] = useState([]);
 
-    const getProducts = async () => {
-        try {
-            const response = await axios.post("/getProduct");
-            const productData = response.data.data.product;
-            console.log("Fetched product:", productData);
-            setProduct(productData);
-        } catch (error) {
-            console.log("Error fetching products:", error);
-        }
-    };
+    const { product } = useContext(StoreContext);
 
     return (
         <>
             <div className='getProduct'>
-                <button onClick={getProducts}>Get Data</button>
+                {/* <button onClick={getProducts}>Get Data</button> */}
             </div>
             <div className="contianer">
                 {product.length > 0 && (

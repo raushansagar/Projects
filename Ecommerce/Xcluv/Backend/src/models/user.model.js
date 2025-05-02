@@ -51,43 +51,12 @@ const addressSchema = new mongoose.Schema(
 
 const Address = mongoose.model("Address", addressSchema);
 
-// card items schema
-const CartItemSchema = new mongoose.Schema({
-    productId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Product',
-        required: true
-    },
-    name: String,
-    price: Number,
-    quantity: {
-        type: Number,
-        default: 1,
-        min: 1
-    },
-    image: String
-});
 
 
-// card schema
-const cardSchema = new mongoose.Schema(
-    {
-        userId: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User",
-            required: true,
-            unique: true,
-        },
-        items: [CartItemSchema],
-        updatedAt: {
-            type: Date,
-            default: Date.now
-        }
 
-    }
-)
 
-const Card = mongoose.model("Card", cardSchema);
+
+
 
 
 // order schema 
@@ -210,8 +179,6 @@ const productSchema = new mongoose.Schema(
 );
 
 
-
-
 const Product = mongoose.model("Product", productSchema);
 
 
@@ -266,13 +233,7 @@ const userSchema = new mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: "Address",
         },
-        currentOrders: [
-            {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "Order",
-            }
-        ],
-        orderHistory: [
+        orders: [
             {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: "Order",

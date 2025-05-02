@@ -387,7 +387,7 @@ const placeOrder = asyncHandler(async (req, res) => {
         quantity,
     }));
 
-    const order = await Order.create({
+    const newOrder = await Order.create({
         userId,
         items: formattedItems,
         address,
@@ -395,10 +395,17 @@ const placeOrder = asyncHandler(async (req, res) => {
         orderStatus: "Processing"
     });
 
-    const orderPlaceItems = await Order.findById(order._id);
+
+    // 2. Push order ID into user.orders
+    await User.findByIdAndUpdate(userId, {
+        $push: { orders: newOrder._id },
+    });
+
+    // const orderPlaceItems = await Order.findById(newOrder._id);
+    //console.log(newOrder);
 
     return res.status(201).json(
-        new ApiResponse(201, { order }, "Order placed successfully")
+        new ApiResponse(201, { order : newOrder }, "Order placed successfully")
     );
 });
 
@@ -412,7 +419,7 @@ const getOrder = asyncHandler(async (req, res) => {
         throw new ApiError(401, "Order not found");
     }
 
-    console.log(allOrder)
+    // console.log(allOrder)
     
 
     return res
@@ -430,5 +437,37 @@ const getOrder = asyncHandler(async (req, res) => {
 
 
 
+const changeOrderStatus = asyncHandler(async (req, res) => {
+    const { orderId, status } = req.body;
 
-export { registerUser, loginUser, logoutUser, userData, addProduct, productData, addMenu, placeOrder, getOrder };
+    const order = await Order.findById(orderId);
+
+    if (!order) {
+        return res.status(404).json({
+            success: false,
+            message: "Order not found",
+        });
+    }
+
+    // Update the order status
+    order.orderStatus = status;
+
+    // Save the updated order
+    await order.save();
+
+    return res.status(200).json(
+        new ApiResponse(
+            200,
+            {
+                orderId: order._id,
+                updatedStatus: order.orderStatus,
+            },
+            "Order status changed successfully"
+        )
+    );
+});
+
+
+
+
+export { registerUser, loginUser, logoutUser, userData, addProduct, productData, addMenu, placeOrder, getOrder, changeOrderStatus };
