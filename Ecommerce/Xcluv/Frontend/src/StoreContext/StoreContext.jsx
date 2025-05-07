@@ -37,7 +37,7 @@ export const ContextProvider = (props) => {
 
     // Fetch product and menu
     const dataFetch = async () => {
-        const response = axios.post(
+        const response = await axios.post(
             'https://xcluv-backend.onrender.com/xcluv/v2/users/getProduct',
             {},  // or your request body
             { withCredentials: true }
