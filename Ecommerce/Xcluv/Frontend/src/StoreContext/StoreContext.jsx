@@ -37,6 +37,8 @@ export const ContextProvider = (props) => {
 
     // Fetch product and menu
     const dataFetch = async () => {
+        const token = localStorage.getItem("token");
+
         const response = await axios.post(
             'https://xcluv-backend.onrender.com/xcluv/v2/users/getProduct',
             {
@@ -45,7 +47,7 @@ export const ContextProvider = (props) => {
                 },
             }
           );
-
+            
         setProduct(response.data.data.product);
         setMenu(response.data.data.menu);
     };

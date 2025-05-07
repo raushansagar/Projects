@@ -12,7 +12,6 @@ const Navbar = () => {
 
             try {
                 const token = localStorage.getItem("token");
-
                 const response = await axios.post(
                     "/logout",
                     {},
@@ -22,7 +21,8 @@ const Navbar = () => {
                         },
                     }
                 );
-
+                
+                console.log(response);
                 localStorage.removeItem("token");
                 setUserData([]);
                 setLoginPopUp(true);
