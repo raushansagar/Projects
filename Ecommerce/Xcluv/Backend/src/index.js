@@ -7,36 +7,20 @@ import cookieParser from 'cookie-parser';
 
 
 
-
 // add path on env
 dotenv.config({
     path: '../.env'
 });
 
 
+
 // cors config
-// app.use(cors({
-//     origin: process.env.CORS_ORIGIN,
-//     credentials: true,
-// }))
-
-
-// cors config by both admin and frontend
-const allowedOrigins = process.env.CORS_ORIGIN.split(",");
-
 app.use(cors({
-    origin: function (origin, callback) {
-
-      // Allow requests with no origin (like mobile apps or curl)
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin: [process.env.CORS_ORIGIN1, process.env.CORS_ORIGIN2],
     credentials: true,
-    
-  }));
+}))
+
+
 
 
 

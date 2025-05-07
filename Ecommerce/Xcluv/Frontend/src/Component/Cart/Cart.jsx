@@ -33,11 +33,11 @@ const Cart = () => {
               <React.Fragment key={items._id}>
                 <div className="cart_items_items">
                   <img src={items.image} alt={items.name} />
-                  <p>{items.name}</p>
-                  <p>₹ {items.price}</p>
-                  <p>{cartItems[items._id]}</p>
-                  <p>₹ {cartItems[items._id] * items.price}</p>
-                  <p onClick={() => removeToCart(items._id)}><i className="bi bi-x-lg"></i></p>
+                    <p>{items.name}</p>
+                    <p>₹ {items.price}</p>
+                    <p>{cartItems[items._id]}</p>
+                    <p>₹ {cartItems[items._id] * items.price}</p>
+                    <p onClick={() => removeToCart(items._id)}><i className="bi bi-x-lg"></i></p>
                 </div>
                 <hr />
                 <br />

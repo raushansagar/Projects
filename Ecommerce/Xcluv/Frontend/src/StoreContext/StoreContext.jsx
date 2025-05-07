@@ -1,35 +1,50 @@
 import { createContext, useEffect, useState } from "react";
 import axios from "../axios.js";
-import '../App.css';
+import "../App.css";
 
-
-// store context 
+// Store context
 export const StoreContext = createContext(null);
 
 export const ContextProvider = (props) => {
-
-    // url 
+    // URL for user endpoints
     const url = "http://localhost:9000/xcluv/v2/users";
 
-    //Backend items
+    // Backend data states
     const [product, setProduct] = useState([]);
     const [menu, setMenu] = useState([]);
     const [order, setOrder] = useState([]);
 
-
-    const [loginPopUp, setLoginPopUp] = useState(false);
+    // User state
+    const [userData, setUserData] = useState(null);
     const [token, setToken] = useState("");
+    const [loginPopUp, setLoginPopUp] = useState(false);
 
+    // Cart
+    const [cartItems, setCartItems] = useState(() => {
+        const saved = localStorage.getItem("cartItems");
+        return saved ? JSON.parse(saved) : {};
+    });
 
-    // procuct and menu data fetch
+    // View Item Toggle
+    const [viewItems, setViewItems] = useState("none");
+
+    // Filters
+    const [category, setCategory] = useState("All");
+    const [discount, setDiscount] = useState("0%");
+    const [newArrival, setNewArrival] = useState(false);
+
+    const changeCategory = (val) => setCategory(val);
+    const changeDiscount = (val) => setDiscount(val);
+    const changeArrival = (val) => setNewArrival(val);
+
+    // Fetch product and menu
     const dataFetch = async () => {
         const response = await axios.post("/getProduct");
         setProduct(response.data.data.product);
         setMenu(response.data.data.menu);
-    }
+    };
 
-
-    // Fetch orders
+    // Fetch order data
     const findOrderPlaced = async () => {
         try {
             const response = await axios.post("/getOrderPlaced");
@@ -39,159 +54,107 @@ export const ContextProvider = (props) => {
         }
     };
 
+    // Fetch current user
+    const userDataFetch = async () => {
+        const token = localStorage.getItem("token");
+        try {
+            const response = await axios.post(
+                "/userData",
+                {},
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+            setUserData(response.data.data.user);
+        } catch (err) {
+            console.error("User data fetch failed:", err);
+            setUserData(null);
+        }
+    };
 
 
-    //store currUserData 
-    const [userData, setUserData] = useState(null);
+
+    // Run once on mount
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+
+        if (token) {
+            dataFetch();
+            findOrderPlaced();
+            userDataFetch();
+            document.body.style.overflow = "auto";
+        } else {
+            setCartItems({});
+            setLoginPopUp(true);
+            document.body.style.overflow = "hidden";
+        }
+    }, [loginPopUp]);
 
 
-    // add cart items
-    const [cartItems, setCartItems] = useState(() => {
-        const saved = localStorage.getItem("cartItems");
-        return saved ? JSON.parse(saved) : {};
-    });
+    // Sync cartItems with localStorage
+    useEffect(() => {
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    }, [cartItems]);
 
 
+
+
+    // Add/Remove cart items
     const addToCart = (itemId) => {
-        if (!cartItems[itemId]) {
-            setCartItems((prev) => ({ ...prev, [itemId]: 1 }));
-        }
-        else {
-            setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
-        }
-    }
+        setCartItems((prev) => ({
+            ...prev,
+            [itemId]: (prev[itemId] || 0) + 1,
+        }));
+    };
 
+    const removeToCart = (itemId) => {
+        setCartItems((prev) => ({
+            ...prev,
+            [itemId]: prev[itemId] - 1,
+        }));
+    };
 
-    // get Total Cart Amount
+    // Total cart value
     const getTotalCartAmount = () => {
         let totalAmount = 0;
-
         for (const it in cartItems) {
             if (cartItems[it] > 0) {
-                let itemInfo = product.find((product) => product._id === it);
-
+                const itemInfo = product.find((p) => p._id === it);
                 if (itemInfo) {
                     totalAmount += itemInfo.price * cartItems[it];
                 }
             }
         }
-
         return totalAmount;
     };
 
-
-    // curr user data fetch
-    const userDataFetch = async () => {
-        const token = localStorage.getItem("token");
-
-        const response = await axios.post(
-            "/userData",
-            {},
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            }
-        );
-
-        setUserData(response.data.data.user);
-    }
-
-    useEffect(() => {
-        const token = localStorage.getItem("token");
-
-        if (token) {
-
-            //card items 
-            localStorage.setItem("cartItems", JSON.stringify(cartItems));
-
-            // product order and menu data fetch
-            dataFetch();
-            findOrderPlaced();
-
-            // user data fetch
-            userDataFetch();
-
-            // set access tokem
-            setUserData(userData);
-
-            //set access token 
-            localStorage.setItem("token", token);
-
-            //set login popup
-            document.body.style.overflow = "auto";
-        }
-        else {
-            setCartItems({});
-            setLoginPopUp(true);
-            document.body.style.overflow = "hidden";
-        }
-
-
-    }, [loginPopUp, cartItems])
-
-
-
-    //view Items
-    const [viewItems, setViewItems] = useState("none");
-
-
-
-
-    //remove cart items
-    const removeToCart = (itemId) => {
-        setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
-    }
-
-
-
-    //set category
-    const [category, setCategory] = useState("All");
-    const changeCategory = (val) => {
-        setCategory(val);
-    }
-
-
-    //set discount
-    const [discount, setDiscount] = useState("0%");
-    const changeDiscount = (val) => {
-        setDiscount(val);
-    }
-
-
-    //new arrivals
-    const [newArrival, setNewArrival] = useState(false);
-    const changeArrival = (val) => {
-        setNewArrival(val);
-    }
-
-
-    //filter Items
+    // Filter products
     const daysAgo = 14;
     const cutoffDate = new Date();
     cutoffDate.setDate(new Date().getDate() - daysAgo);
 
-    const productFilter = product?.filter(item => {
-        // Category filter
+    const productFilter = product?.filter((item) => {
         const categoryMatch = category === "All" || item.category === category;
-
-        // Discount filter
         const discountMatch = discount === "0%" || item.discount >= discount;
+        const newArrivalsMatch = new Date(item.updatedAt) >= cutoffDate;
 
-        // New Arrivals filter (only apply if newArrival is true)
-        const newArrivalsMatch = newArrival && new Date(item.updatedAt) >= cutoffDate;
-
-        return categoryMatch && discountMatch || (newArrival && newArrivalsMatch);
+        return (
+            (categoryMatch && discountMatch) ||
+            (newArrival && newArrivalsMatch)
+        );
     });
 
-
-    //flter items
-    const filterOrder = Array.isArray(order) && userData && Array.isArray(userData.orders)
-        ? order.filter(item =>
-            userData.orders.includes(item._id?.toString())
-        )
-        : [];
-
+    // Filter orders specific to current user
+    const filterOrder =
+        Array.isArray(order) &&
+        userData &&
+        Array.isArray(userData.orders)
+            ? order.filter((item) =>
+                  userData.orders.includes(item._id?.toString())
+              )
+            : [];
 
     const contextValue = {
         viewItems,
@@ -222,12 +185,11 @@ export const ContextProvider = (props) => {
         setCartItems,
         order,
         filterOrder,
-    }
-
+    };
 
     return (
         <StoreContext.Provider value={contextValue}>
             {props.children}
         </StoreContext.Provider>
-    )
-}
+    );
+};

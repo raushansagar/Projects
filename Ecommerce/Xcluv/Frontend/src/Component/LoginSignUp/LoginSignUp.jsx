@@ -2,6 +2,8 @@ import React, { useContext, useState } from 'react'
 import './LoginSignUp.css';
 import axios from "../../axios.js";
 import { StoreContext } from '../../StoreContext/StoreContext.jsx';
+import { Link } from 'react-router-dom';
+
 
 const LoginSignUp = () => {
 
@@ -33,13 +35,7 @@ const LoginSignUp = () => {
       } else {
         console.log(fullName, email, password);
         const response = await axios.post("/register", { fullName, userName, email, password });
-
-        const status = response?.status;
-        const message = response?.data?.message;
-
-        if (status === 200) {
-          alert(message);
-        }
+        toast.success("Create account successfully!");
       }
     } catch (error) {
       const status = error.response?.status;
