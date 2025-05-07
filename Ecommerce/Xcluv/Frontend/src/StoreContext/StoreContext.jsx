@@ -70,6 +70,8 @@ export const ContextProvider = (props) => {
                     },
                 }
             );
+
+            console.log(response);
             setUserData(response.data.data.user);
         } catch (err) {
             console.error("User data fetch failed:", err);
