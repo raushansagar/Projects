@@ -250,7 +250,7 @@ const productData = asyncHandler(async (req, res) => {
 
     // check token
     if (!token) {
-        throw new ApiError(401, "Unauthorized request")
+        throw new ApiError(401, "Unauthorizeds¯ß request")
     }
 
     // get all product 
