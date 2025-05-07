@@ -240,16 +240,16 @@ const addMenu = asyncHandler(async (req, res) => {
 // get product data
 const productData = asyncHandler(async (req, res) => {
 
-    // check  user login or not
-    const token = req.header("Authorization")?.replace("Bearer ", "")?.trim();
+    // // check  user login or not
+    // const token = req.header("Authorization")?.replace("Bearer ", "")?.trim();
 
 
-    // console.log(token);
+    // // console.log(token);
 
-    // check token
-    if (!token) {
-        throw new ApiError(401, "Unauthorizeds¯ß request")
-    }
+    // // check token
+    // if (!token) {
+    //     throw new ApiError(401, "Unauthorizeds¯ß request")
+    // }
 
     // get all product 
     const product = await Product.find({});
