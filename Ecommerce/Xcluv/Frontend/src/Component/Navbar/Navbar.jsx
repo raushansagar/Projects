@@ -13,27 +13,18 @@ const Navbar = () => {
             try {
                 const response = await axios.post(
                     "/logout",
+                    {},
                     { withCredentials: true }
                 );
+
                 localStorage.removeItem("token");
                 setUserData([]);
                 setLoginPopUp(true);
                 setUserData(null);
+
             } catch (error) {
-                alert(response.data);
+                alert(response, error);
             }
-
-            //console.log(response);
-
-            // if (response.status) {
-            //     localStorage.removeItem("token");
-            //     setUserData([]);
-            //     setLoginPopUp(true);
-            //     setUserData(null);
-            // }
-            // else {
-            //     alert(response.data);
-            // }
         }
     }
 
