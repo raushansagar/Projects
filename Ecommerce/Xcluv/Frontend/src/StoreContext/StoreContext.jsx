@@ -6,8 +6,6 @@ import "../App.css";
 export const StoreContext = createContext(null);
 
 export const ContextProvider = (props) => {
-    // URL for user endpoints
-    const url = "http://localhost:9000/xcluv/v2/users";
 
     // Backend data states
     const [product, setProduct] = useState([]);
@@ -39,7 +37,12 @@ export const ContextProvider = (props) => {
 
     // Fetch product and menu
     const dataFetch = async () => {
-        const response = await axios.post("/getProduct");
+        const response = axios.post(
+            'https://xcluv-backend.onrender.com/xcluv/v2/users/getProduct',
+            {},  // or your request body
+            { withCredentials: true }
+          );
+          
         setProduct(response.data.data.product);
         setMenu(response.data.data.menu);
     };
