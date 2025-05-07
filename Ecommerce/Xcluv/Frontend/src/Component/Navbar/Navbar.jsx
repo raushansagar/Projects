@@ -9,18 +9,31 @@ const Navbar = () => {
 
     const onLogout = async () => {
         if (!loginPopUp) {
-            const response = await axios.post("/logout");
-            console.log(response);
-
-            if (response.status) {
+            
+            try {
+                const response = await axios.post(
+                    "/logout",
+                    { withCredentials: true }
+                );
                 localStorage.removeItem("token");
                 setUserData([]);
                 setLoginPopUp(true);
                 setUserData(null);
-            }
-            else {
+            } catch (error) {
                 alert(response.data);
             }
+
+            //console.log(response);
+
+            // if (response.status) {
+            //     localStorage.removeItem("token");
+            //     setUserData([]);
+            //     setLoginPopUp(true);
+            //     setUserData(null);
+            // }
+            // else {
+            //     alert(response.data);
+            // }
         }
     }
 
