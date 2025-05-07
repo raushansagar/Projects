@@ -133,6 +133,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
 //logout user
 const logoutUser = asyncHandler(async (req, res) => {
+    throw new ApiError(401, "Sagar request")
 
     await User.findByIdAndUpdate(
         req.user._id,
@@ -241,7 +242,9 @@ const addMenu = asyncHandler(async (req, res) => {
 const productData = asyncHandler(async (req, res) => {
 
     // // check  user login or not
-    // const token = req.header("Authorization")?.replace("Bearer ", "")?.trim();
+    // const token =
+    //     req.cookies?.accessToken ||
+    //     req.header("Authorization")?.replace("Bearer ", "")?.trim();
 
 
     // // console.log(token);
