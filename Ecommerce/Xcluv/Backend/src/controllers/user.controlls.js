@@ -133,10 +133,21 @@ const loginUser = asyncHandler(async (req, res) => {
 
 //logout user
 const logoutUser = asyncHandler(async (req, res) => {
-    throw new ApiError(401, "Sagar request")
+
+    const token =
+        req.cookies?.accessToken ||
+        req.header("Authorization")?.replace("Bearer ", "")?.trim();
+
+    if (!token) {
+        throw new ApiError(401, "Unauthorized request")
+    }
+
+    const decodeInfoToken = await jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+    const newUser = await User.findById(decodeInfoToken?._id).select("-password -refreshToken");
+
 
     await User.findByIdAndUpdate(
-        req.user._id,
+        newUser._id,
         {
             $unset: { refreshToken: "" }
         },
@@ -144,6 +155,7 @@ const logoutUser = asyncHandler(async (req, res) => {
             new: true
         }
     )
+    
 
     console.log("User logged Out");
 
@@ -406,7 +418,7 @@ const placeOrder = asyncHandler(async (req, res) => {
     //console.log(newOrder);
 
     return res.status(201).json(
-        new ApiResponse(201, { order : newOrder }, "Order placed successfully")
+        new ApiResponse(201, { order: newOrder }, "Order placed successfully")
     );
 });
 
@@ -421,7 +433,7 @@ const getOrder = asyncHandler(async (req, res) => {
     }
 
     // console.log(allOrder)
-    
+
 
     return res
         .status(200)

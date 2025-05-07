@@ -25,7 +25,7 @@ router.route("/login").post(loginUser);
 
 
 // logout router
-router.route("/logout").post(verifyJWT, logoutUser)
+router.route("/logout").post(logoutUser)
 
 
 // user data
