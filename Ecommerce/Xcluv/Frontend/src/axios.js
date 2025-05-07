@@ -3,7 +3,7 @@ import axios from "axios";
 
 
 const instance = axios.create({
-    baseURL: 'http://localhost:9000/xcluv/v2/users/',
+    baseURL: 'https://xcluv-backend.onrender.com',
     withCredentials: true,
   });
   
