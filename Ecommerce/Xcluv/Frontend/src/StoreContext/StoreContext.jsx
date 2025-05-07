@@ -42,7 +42,7 @@ export const ContextProvider = (props) => {
             {},  // or your request body
             { withCredentials: true }
           );
-          
+
         setProduct(response.data.data.product);
         setMenu(response.data.data.menu);
     };
@@ -184,7 +184,6 @@ export const ContextProvider = (props) => {
         changeArrival,
         userData,
         setUserData,
-        url,
         setCartItems,
         order,
         filterOrder,
