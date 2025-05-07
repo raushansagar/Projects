@@ -37,24 +37,18 @@ export const ContextProvider = (props) => {
 
     // Fetch product and menu
     const dataFetch = async () => {
-        try {
-          const response = await axios.post(
+        const response = await axios.post(
             'https://xcluv-backend.onrender.com/xcluv/v2/users/getProduct',
-            {},  // or your request body
-            { withCredentials: true }
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }
           );
-      
-          // Check if the response has data and the structure is correct
-          if (response && response.data) {
-            setProduct(response.data.data.product);
-            setMenu(response.data.data.menu);
-          } else {
-            console.error('No data found in response');
-          }
-        } catch (error) {
-          console.error('Error fetching product and menu:', error);
-        }
-      };
+
+        setProduct(response.data.data.product);
+        setMenu(response.data.data.menu);
+    };
 
     // Fetch order data
     const findOrderPlaced = async () => {
