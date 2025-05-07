@@ -155,7 +155,7 @@ const logoutUser = asyncHandler(async (req, res) => {
             new: true
         }
     )
-    
+
 
     console.log("User logged Out");
 
@@ -253,18 +253,20 @@ const addMenu = asyncHandler(async (req, res) => {
 // get product data
 const productData = asyncHandler(async (req, res) => {
 
-    // // check  user login or not
-    // const token =
-    //     req.cookies?.accessToken ||
-    //     req.header("Authorization")?.replace("Bearer ", "")?.trim();
+    const token =
+        req.cookies?.accessToken ||
+        req.header("Authorization")?.replace("Bearer ", "")?.trim();
 
+    if (!token) {
+        throw new ApiError(401, "Unauthorized request for finding product")
+    }
 
-    // // console.log(token);
+    const decodeInfoToken = await jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+    const newUser = await User.findById(decodeInfoToken?._id).select("-password -refreshToken");
 
-    // // check token
-    // if (!token) {
-    //     throw new ApiError(401, "Unauthorizeds¯ß request")
-    // }
+    if(!newUser){
+        throw new ApiError(401, "Unauthorized request for finding product")
+    }
 
     // get all product 
     const product = await Product.find({});
