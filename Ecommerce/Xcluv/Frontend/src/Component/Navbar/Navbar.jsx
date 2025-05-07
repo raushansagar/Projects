@@ -9,12 +9,18 @@ const Navbar = () => {
 
     const onLogout = async () => {
         if (!loginPopUp) {
-            
+
             try {
+                const token = localStorage.getItem("token");
+
                 const response = await axios.post(
                     "/logout",
                     {},
-                    { withCredentials: true }
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
                 );
 
                 localStorage.removeItem("token");
