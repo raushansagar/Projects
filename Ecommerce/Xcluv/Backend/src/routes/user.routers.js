@@ -44,8 +44,9 @@ router.route("/product").post(
 );
 
 
+
 // get all product 
-router.route("/getProduct").post(productData);
+router.route("/getProduct").post(verifyJWT,productData);
 
 
 // add order placed
