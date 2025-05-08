@@ -46,11 +46,11 @@ router.route("/product").post(
 
 
 // get all product 
-router.route("/getProduct").post(verifyJWT,productData);
+router.route("/getProduct").post(productData);
 
 
 // add order placed
-router.route("/orderPlaced").post(verifyJWT, placeOrder);
+router.route("/orderPlaced").post(placeOrder);
 
 
 //get all or(der placed
