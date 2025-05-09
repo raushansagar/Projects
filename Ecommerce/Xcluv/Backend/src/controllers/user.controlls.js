@@ -41,10 +41,7 @@ const registerUser = asyncHandler(async (req, res) => {
     }
 
     const exitedUser = await User.findOne({
-        $or: [{ email: email.toLowerCase() }, 
-            { 
-                // userName: userName.toLowerCase()
-             }]
+        $or: [{ email: email.toLowerCase() }, { userName: userName.toLowerCase() }]
     });
 
 
