@@ -26,7 +26,7 @@ const LoginSignUp = () => {
         if (response.status === 200) {
           localStorage.setItem("token", response.data.data.accessToken);
           setToken(response.data.data.accessToken);
-          setLoginPopUp(false);
+          setLoginPopUp(true);
         }
         else {
           alert("Wrong Password");
