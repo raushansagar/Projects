@@ -25,17 +25,17 @@ const LoginSignUp = () => {
 
       // Login User 
   
-      
-      try {
-        const response = await axios.post("/login", { email, password });
-
+      const response = await axios.post("/login", { email, password });
+      if (response.status === 200) {
         localStorage.setItem("token", response.data.data.accessToken);
         setToken(response.data.data.accessToken);
         setLoginPopUp(true);
-      } catch (error) {
-        // console.log(error);
-        toast.error("Email or Password not match");
       }
+      else {
+        console.log(response.data);
+        alert("Wrong Password");
+      }
+
     } else {
 
       // Register User 
