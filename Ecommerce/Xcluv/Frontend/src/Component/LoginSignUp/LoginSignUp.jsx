@@ -48,8 +48,9 @@ const LoginSignUp = () => {
         }
       }
     } catch (error) {
-      const status = error.response.request.status;
-      console.log(status);
+      const st = error.response.status;
+
+      console.log(st);
       console.alert("Error occures");
     }
 
