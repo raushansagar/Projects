@@ -33,8 +33,8 @@ const LoginSignUp = () => {
         setToken(response.data.data.accessToken);
         setLoginPopUp(true);
       } catch (error) {
-        console.log(error);
-        toast.error(error);
+        // console.log(error);
+        toast.error("Email or Password not match");
       }
     } else {
 
