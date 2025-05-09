@@ -444,9 +444,8 @@ const getOrder = asyncHandler(async (req, res) => {
         throw new ApiError(401, "Unauthorized request");
     }
 
-
-
-    const allOrder = await Order.findById(newUser._id);
+    
+    const allOrder = await Order.find({});
     if (!allOrder) {
         throw new ApiError(401, "Order not found");
     }
