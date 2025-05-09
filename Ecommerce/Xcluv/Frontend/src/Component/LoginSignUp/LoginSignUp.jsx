@@ -21,35 +21,65 @@ const LoginSignUp = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    if (user === "Login") {
 
-      // Login User 
-  
-      const response = await axios.post("/login", { email, password });
-      if (response.status === 200) {
-        localStorage.setItem("token", response.data.data.accessToken);
-        setToken(response.data.data.accessToken);
-        setLoginPopUp(true);
+    try {
+
+      if (user === "Login") {
+
+        // User Login 
+
+        const response = await axios.post("/login", { email, password });
+
+        if (response.status === 200) {
+          localStorage.setItem("token", response.data.data.accessToken);
+          setToken(response.data.data.accessToken);
+          toast.success("Login successfully!");
+          setLoginPopUp(true);
+        }
       }
       else {
-        console.log(response.data);
-        alert("Wrong Password");
-      }
 
-    } else {
-
-      // Register User 
-      console.log(fullName, email, password);
-      try {
         const response = await axios.post("/register", { fullName, userName, email, password });
 
-        console.log(response.data);
-        setUser("Login")
-        toast.success("Account create successfully!");
-      } catch (error) {
-        console.log("Error User Define");
+        if (response.status === 200) {
+          console.log(response.data);
+          setUser("Login")
+          toast.success("Account create successfully!");
+        }
       }
+    } catch (error) {
+      console.log("Error occures", error);
     }
+
+    // if (user === "Login") {
+
+    //   // Login User 
+
+    //   const response = await axios.post("/login", { email, password });
+    //   if (response.status === 200) {
+    //     localStorage.setItem("token", response.data.data.accessToken);
+    //     setToken(response.data.data.accessToken);
+    //     setLoginPopUp(true);
+    //   }
+    //   else {
+    //     console.log(response.data);
+    //     alert("Wrong Password");
+    //   }
+
+    // } else {
+
+    //   // Register User 
+    //   console.log(fullName, email, password);
+    //   try {
+    //     const response = await axios.post("/register", { fullName, userName, email, password });
+
+    //     console.log(response.data);
+    //     setUser("Login")
+    //     toast.success("Account create successfully!");
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // }
 
   };
 
