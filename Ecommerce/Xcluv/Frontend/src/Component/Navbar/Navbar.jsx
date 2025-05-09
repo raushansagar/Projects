@@ -8,7 +8,7 @@ const Navbar = () => {
     const { loginPopUp, setLoginPopUp, userData, setUserData, url } = useContext(StoreContext);
 
     const onLogout = async () => {
-        if (!loginPopUp) {
+        if (loginPopUp) {
 
             try {
                 const token = localStorage.getItem("token");
@@ -25,7 +25,7 @@ const Navbar = () => {
                 console.log(response);
                 localStorage.removeItem("token");
                 setUserData([]);
-                setLoginPopUp(true);
+                setLoginPopUp(false);
                 setUserData(null);
 
             } catch (error) {
