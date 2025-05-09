@@ -47,7 +47,7 @@ const LoginSignUp = () => {
           toast.success("Account create successfully!");
         }
       }
-      
+
     } catch (error) {
       if (error.response) {
         const status = error.response.status;
@@ -58,11 +58,11 @@ const LoginSignUp = () => {
     
         // Optional: show different messages based on status code
         if (status === 400) {
-          toast.error("Bad Request: " + backendMessage);
+          toast.error("All fields are required");
         } else if (status === 401) {
-          toast.error("Unauthorized: " + backendMessage);
+          console.alert("Invalid Email or Username already exists");
         } else if (status === 403) {
-          toast.error("Forbidden: " + backendMessage);
+          toast.error("dsfs");
         } else if (status === 500) {
           toast.error("Server Error. Please try again later.");
         } else {
