@@ -3,13 +3,10 @@ import './Order.css';
 import { StoreContext } from '../../StoreContext/StoreContext';
 import { toast } from 'react-toastify';
 import axios from '../../axios.js';
-import { Link } from 'react-router-dom'
-
-
+import { Link } from 'react-router-dom';
 
 const Order = () => {
   const { cartItems, getTotalCartAmount, setCartItems } = useContext(StoreContext);
-  console.log(getTotalCartAmount);
 
   const [deliveryInfo, setDeliveryInfo] = useState({
     fullName: '',
@@ -28,41 +25,36 @@ const Order = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Delivery Info:', deliveryInfo);
     toast.success("Address Saved!");
   };
 
-
   const handlePlaceOrder = async () => {
-
     try {
+      const shippingCost = getTotalCartAmount() > 0 ? 45 : 0;
+      const amount = getTotalCartAmount() + shippingCost;
 
       const token = localStorage.getItem("token");
-      console.log(cartItems);
-      console.log(address);
-      console.log(totalAmount);
 
       const response = await axios.post(
         "/orderPlaced",
         {
           items: cartItems,
           address: deliveryInfo,
-          amount: totalAmount,
-        }, 
+          amount: amount,
+        },
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        });
+        }
+      );
 
       toast.success("Order placed successfully!");
       setCartItems({});
     } catch (error) {
       console.log(error);
-
       toast.error("Order Failed!");
     }
-
   };
 
   const shippingCost = getTotalCartAmount() > 0 ? 45 : 0;
@@ -74,11 +66,46 @@ const Order = () => {
       <div className="deliveryInfo">
         <h2>Delivery Information</h2>
         <form onSubmit={handleSubmit}>
-          <input type="text" name="fullName" placeholder="Full Name" required value={deliveryInfo.fullName} onChange={handleInputChange} />
-          <input type="text" name="phone" placeholder="Phone Number" required value={deliveryInfo.phone} onChange={handleInputChange} />
-          <input type="text" name="address" placeholder="Address" required value={deliveryInfo.address} onChange={handleInputChange} />
-          <input type="text" name="city" placeholder="City" required value={deliveryInfo.city} onChange={handleInputChange} />
-          <input type="text" name="zip" placeholder="ZIP Code" required value={deliveryInfo.zip} onChange={handleInputChange} />
+          <input
+            type="text"
+            name="fullName"
+            placeholder="Full Name"
+            required
+            value={deliveryInfo.fullName}
+            onChange={handleInputChange}
+          />
+          <input
+            type="text"
+            name="phone"
+            placeholder="Phone Number"
+            required
+            value={deliveryInfo.phone}
+            onChange={handleInputChange}
+          />
+          <input
+            type="text"
+            name="address"
+            placeholder="Address"
+            required
+            value={deliveryInfo.address}
+            onChange={handleInputChange}
+          />
+          <input
+            type="text"
+            name="city"
+            placeholder="City"
+            required
+            value={deliveryInfo.city}
+            onChange={handleInputChange}
+          />
+          <input
+            type="text"
+            name="zip"
+            placeholder="ZIP Code"
+            required
+            value={deliveryInfo.zip}
+            onChange={handleInputChange}
+          />
           <button type="submit">Save Address</button>
         </form>
       </div>
@@ -123,7 +150,9 @@ const Order = () => {
         </div>
 
         {/* Place Order Button */}
-        <Link className="placeOrderBtn" to="/" onClick={handlePlaceOrder}>Place Order</Link>
+        <Link className="placeOrderBtn" to="/" onClick={handlePlaceOrder}>
+          Place Order
+        </Link>
       </div>
     </div>
   );
