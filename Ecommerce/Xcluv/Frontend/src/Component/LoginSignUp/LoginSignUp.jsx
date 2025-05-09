@@ -48,7 +48,7 @@ const LoginSignUp = () => {
         }
       }
     } catch (error) {
-      console.log("Error occures", error);
+      console.alert("Error occures", error);
     }
 
     // if (user === "Login") {
