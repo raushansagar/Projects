@@ -47,6 +47,7 @@ const LoginSignUp = () => {
           toast.success("Account create successfully!");
         }
       }
+      
     } catch (error) {
       if (error.response) {
         const status = error.response.status;
@@ -67,7 +68,6 @@ const LoginSignUp = () => {
         } else {
           toast.error(backendMessage);
         }
-    
       } else {
         // Network or unexpected error
         console.log("Unexpected error:", error.message);

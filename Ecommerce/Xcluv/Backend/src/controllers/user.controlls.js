@@ -66,7 +66,7 @@ const registerUser = asyncHandler(async (req, res) => {
         throw new ApiError(500, "Something went wrong while registering the user");
     }
 
-    return res.status(201).json(
+    return res.status(200).json(
         new ApiResponse(200, checkUser, "User Registered Successfully")
     );
 })
@@ -80,7 +80,7 @@ const loginUser = asyncHandler(async (req, res) => {
     const { userName, email, password } = req.body;
 
     if (!email) {
-        throw new ApiError(400, "Email is required")
+        throw new ApiError(400, "All fields are required")
     }
 
     // check email
