@@ -404,10 +404,7 @@ const placeOrder = asyncHandler(async (req, res) => {
         throw new ApiError(401, "Unauthorized request");
     }
 
-    const { items, address, amount } = req.body;
-    const userId = req.user?._id;
-
-    if (!userId || !items || !address || !amount) {
+    if (!items || !address || !amount) {
         throw new ApiError(400, "All fields are required");
     }
 
