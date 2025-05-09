@@ -9,7 +9,6 @@ import { Link } from 'react-router-dom'
 
 const Order = () => {
   const { cartItems, getTotalCartAmount, setCartItems } = useContext(StoreContext);
-
   console.log(getTotalCartAmount);
 
   const [deliveryInfo, setDeliveryInfo] = useState({
