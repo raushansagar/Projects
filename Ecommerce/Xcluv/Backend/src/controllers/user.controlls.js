@@ -415,7 +415,7 @@ const placeOrder = asyncHandler(async (req, res) => {
     }));
 
     const newOrder = await Order.create({
-        userId,
+        userId : user._id,
         items: formattedItems,
         address,
         amount,
