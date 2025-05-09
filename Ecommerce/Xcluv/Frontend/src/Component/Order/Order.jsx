@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 
 
 const Order = () => {
-  const { cartItems, getTotalCartAmount, token, setCartItems } = useContext(StoreContext);
+  const { cartItems, getTotalCartAmount, setCartItems } = useContext(StoreContext);
 
   const [deliveryInfo, setDeliveryInfo] = useState({
     fullName: '',
@@ -35,19 +35,27 @@ const Order = () => {
   const handlePlaceOrder = async () => {
 
     try {
-      const response = await axios.post("/orderPlaced", {
-        items: cartItems,
-        address: deliveryInfo,
-        amount: totalAmount,
-      }, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+
+      const token = localStorage.getItem("token");
+
+      const response = await axios.post(
+        "/orderPlaced",
+        {
+          items: cartItems,
+          address: deliveryInfo,
+          amount: totalAmount,
+        }, 
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
       toast.success("Order placed successfully!");
       setCartItems({});
     } catch (error) {
+      console.log(error);
+      
       toast.error("Order Failed!");
     }
 

@@ -419,8 +419,8 @@ const placeOrder = asyncHandler(async (req, res) => {
     // const orderPlaceItems = await Order.findById(newOrder._id);
     //console.log(newOrder);
 
-    return res.status(201).json(
-        new ApiResponse(201, { order: newOrder }, "Order placed successfully")
+    return res.status(200).json(
+        new ApiResponse(200, { order: newOrder }, "Order placed successfully")
     );
 });
 
@@ -444,7 +444,7 @@ const getOrder = asyncHandler(async (req, res) => {
         throw new ApiError(401, "Unauthorized request");
     }
 
-    
+
     const allOrder = await Order.find({});
     if (!allOrder) {
         throw new ApiError(401, "Order not found");
