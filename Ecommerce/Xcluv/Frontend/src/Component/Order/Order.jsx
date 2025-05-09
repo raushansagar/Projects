@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react';
 import './Order.css';
 import { StoreContext } from '../../StoreContext/StoreContext';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import axios from '../../axios.js';
 import { Link } from 'react-router-dom'
 

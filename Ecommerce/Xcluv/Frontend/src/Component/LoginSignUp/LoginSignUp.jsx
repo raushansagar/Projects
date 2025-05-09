@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 
+
 const LoginSignUp = () => {
 
   const [user, setUser] = useState("Login");
@@ -23,17 +24,17 @@ const LoginSignUp = () => {
     if (user === "Login") {
 
       // Login User 
-      const response = await axios.post("/login", { email, password });
-
-      if (response.status === 200) {
+  
+      
+      try {
+        const response = await axios.post("/login", { email, password });
+        
         localStorage.setItem("token", response.data.data.accessToken);
         setToken(response.data.data.accessToken);
         setLoginPopUp(true);
+      } catch (error) {
+        console.log(error);
       }
-      else {
-        alert("Wrong Password");
-      }
-
     } else {
 
       // Register User 
