@@ -414,13 +414,17 @@ const placeOrder = asyncHandler(async (req, res) => {
         quantity,
     }));
 
-    const newOrder = await Order.create({
-        userId : user._id,
-        items: formattedItems,
-        address,
-        amount,
-        orderStatus: "Processing"
-    });
+    try {
+        const newOrder = await Order.create({
+            userId : user._id,
+            items: formattedItems,
+            address,
+            amount,
+            orderStatus: "Processing"
+        });
+    } catch (error) {
+        throw new ApiError(401, "All fields are requisdsred");
+    }
 
 
     //Push order ID into user.orders
