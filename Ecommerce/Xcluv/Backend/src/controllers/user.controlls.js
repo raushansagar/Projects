@@ -423,14 +423,18 @@ const placeOrder = asyncHandler(async (req, res) => {
             orderStatus: "Processing"
         });
     } catch (error) {
-        throw new ApiError(401, "All fields are requisdsred");
+        throw new ApiError(402, "All fields are requisdsred");
     }
 
 
     //Push order ID into user.orders
-    await User.findByIdAndUpdate(user._id,{
-        $push: { orders: newOrder._id},
-    });
+    try {
+        await User.findByIdAndUpdate(user._id,{
+            $push: { orders: newOrder._id},
+        });
+    } catch (error) {
+        throw new ApiError(403, "All fields are requisdsred");
+    }
 
     // const orderPlaceItems = await Order.findById(newOrder._id);
     //console.log(newOrder);
