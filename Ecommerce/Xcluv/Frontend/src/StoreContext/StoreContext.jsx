@@ -94,6 +94,7 @@ export const ContextProvider = (props) => {
             dataFetch();
             findOrderPlaced();
             userDataFetch();
+            setLoginPopUp(true);
             document.body.style.overflow = "auto";
         } else {
             setCartItems({});
