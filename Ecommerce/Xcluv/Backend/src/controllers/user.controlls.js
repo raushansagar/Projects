@@ -424,8 +424,8 @@ const placeOrder = asyncHandler(async (req, res) => {
 
 
     //Push order ID into user.orders
-    await User.findByIdAndUpdate(userId, {
-        $push: { orders: newOrder._id },
+    await User.findByIdAndUpdate(user._id,{
+        $push: { orders: newOrder._id},
     });
 
     // const orderPlaceItems = await Order.findById(newOrder._id);
