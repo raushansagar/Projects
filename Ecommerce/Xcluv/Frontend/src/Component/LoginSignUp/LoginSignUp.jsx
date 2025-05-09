@@ -47,7 +47,7 @@ const LoginSignUp = () => {
         setUser("Login")
         toast.success("Account create successfully!");
       } catch (error) {
-        console.log(error);
+        console.log("Error User Define");
       }
     }
 
