@@ -60,7 +60,7 @@ const LoginSignUp = () => {
         if (status === 400) {
           toast.error("All fields are required");
         } else if (status === 401) {
-          console.alert("Invalid Email or Username already exists");
+          alert("Invalid Email or Username already exists");
         } else if (status === 403) {
           toast.error("dsfs");
         } else if (status === 500) {
