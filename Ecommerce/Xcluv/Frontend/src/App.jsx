@@ -23,7 +23,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />
-        {loginPopUp ? <Route path='/Shop' element={<DisplayItems />} /> : <Route path='/Shop' element={<DisplayItems />} />}
+        {loginPopUp ? <Route path='/' element={<DisplayItems />} /> : <Route path='/Shop' element={<DisplayItems />} />}
         <Route path='/New' element={<Home />} />
         <Route path='/Offers' element={<NewArrivals />} />
         <Route path='/Contact' element={<Home />} />
