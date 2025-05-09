@@ -20,7 +20,7 @@ function App() {
 
   return (
     <div>
-      {!loginPopUp && <LoginSignUp />}
+      {!loginPopUp ? <LoginSignUp /> : ""}
       <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />
