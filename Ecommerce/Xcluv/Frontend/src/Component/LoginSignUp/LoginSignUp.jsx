@@ -37,15 +37,10 @@ const LoginSignUp = () => {
         const response = await axios.post("/register", { fullName, userName, email, password });
 
         console.log(response.data);
-        // if(response.status === 200){
-        //   localStorage.setItem("token", response.data.data.accessToken);
-        //   setToken(response.data.data.accessToken);
-        //   setLoginPopUp(true);
-        // }
-        // else {
-        //   alert("Wrong Password");
-        // }
-        // toast.success("Create account successfully!");
+        if(response.status === 200){
+          setUser("Login")
+          toast.success("Account create successfully!");
+        }
       }
     } catch (error) {
       const status = error.response?.status;
