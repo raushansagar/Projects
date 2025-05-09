@@ -52,15 +52,28 @@ export const ContextProvider = (props) => {
         setMenu(response.data.data.menu);
     };
 
+
     // Fetch order data
     const findOrderPlaced = async () => {
         try {
-            const response = await axios.post("/getOrderPlaced");
+            const token = localStorage.getItem("token");
+
+            const response = await axios.post(
+                "/getOrderPlaced",
+                {},
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+            
             setOrder(response.data.data.order);
         } catch (error) {
             console.error("Error fetching orders:", error);
         }
     };
+    
 
     // Fetch current user
     const userDataFetch = async () => {
