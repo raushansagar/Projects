@@ -48,15 +48,31 @@ const LoginSignUp = () => {
         }
       }
     } catch (error) {
-      if (error.response && error.response.data) {
-        console.log("Server error message:", error.response.data.message);
+      if (error.response) {
+        const status = error.response.status;
+        const backendMessage = error.response.data?.message || "Something went wrong";
+    
+        console.log("Status Code:", status);
+        console.log("Server error message:", backendMessage);
+    
+        // Optional: show different messages based on status code
+        if (status === 400) {
+          toast.error("Bad Request: " + backendMessage);
+        } else if (status === 401) {
+          toast.error("Unauthorized: " + backendMessage);
+        } else if (status === 403) {
+          toast.error("Forbidden: " + backendMessage);
+        } else if (status === 500) {
+          toast.error("Server Error. Please try again later.");
+        } else {
+          toast.error(backendMessage);
+        }
+    
       } else {
+        // Network or unexpected error
         console.log("Unexpected error:", error.message);
+        toast.error("Network error or unexpected issue occurred");
       }
-      // const st = error.response.status;
-
-      // console.log(st);
-      // console.alert("Error occures");
     }
 
     // if (user === "Login") {
