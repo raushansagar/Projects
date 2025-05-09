@@ -37,6 +37,9 @@ const Order = () => {
     try {
 
       const token = localStorage.getItem("token");
+      console.log(cartItems);
+      console.log(address);
+      console.log(totalAmount);
 
       const response = await axios.post(
         "/orderPlaced",
@@ -55,7 +58,7 @@ const Order = () => {
       setCartItems({});
     } catch (error) {
       console.log(error);
-      
+
       toast.error("Order Failed!");
     }
 
