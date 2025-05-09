@@ -429,6 +429,23 @@ const placeOrder = asyncHandler(async (req, res) => {
 // get Order
 const getOrder = asyncHandler(async (req, res) => {
 
+    const token =
+        req.cookies?.accessToken ||
+        req.header("Authorization")?.replace("Bearer ", "")?.trim();
+
+    if (!token) {
+        throw new ApiError(401, "Unauthorized request")
+    }
+
+    const decodeInfoToken = await jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+    const newUser = await User.findById(decodeInfoToken?._id).select("-password -refreshToken");
+
+    if(!newUser){
+        throw new ApiError(401, "Unauthorized request");
+    }
+
+    
+
     const allOrder = await Order.find({});
     if (!allOrder) {
         throw new ApiError(401, "Order not found");
