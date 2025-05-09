@@ -3,6 +3,8 @@ import './Navbar.css'
 import { Link } from 'react-router-dom'
 import { StoreContext } from '../../StoreContext/StoreContext'
 import axios from '../../axios.js';
+import { toast } from 'react-toastify';
+
 
 const Navbar = () => {
     const { loginPopUp, setLoginPopUp, userData, setUserData, url } = useContext(StoreContext);
@@ -22,14 +24,13 @@ const Navbar = () => {
                     }
                 );
                 
-                console.log(response);
                 localStorage.removeItem("token");
                 setUserData([]);
                 setLoginPopUp(false);
                 setUserData(null);
 
             } catch (error) {
-                alert(response, error);
+                toast.error("Network error or unexpected issue occurred");
             }
         }
     }
