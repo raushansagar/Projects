@@ -11,8 +11,8 @@ import LoginSignUp from './Component/LoginSignUp/LoginSignUp';
 import Order from './Component/Order/Order';
 import { StoreContext } from './StoreContext/StoreContext';
 import { useContext } from 'react';
-import { ToastContainer } from 'react-toastify';
 import CurrentOrder from './Component/CurrentOrder/CurrentOrder';
+import { ToastContainer, toast } from 'react-toastify';
 
 function App() {
   const { loginPopUp } = useContext(StoreContext);
