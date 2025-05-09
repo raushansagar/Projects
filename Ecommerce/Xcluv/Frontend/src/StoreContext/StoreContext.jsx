@@ -97,7 +97,7 @@ export const ContextProvider = (props) => {
             document.body.style.overflow = "auto";
         } else {
             setCartItems({});
-            setLoginPopUp(true);
+            setLoginPopUp(false);
             document.body.style.overflow = "hidden";
         }
     }, [loginPopUp]);
