@@ -48,10 +48,15 @@ const LoginSignUp = () => {
         }
       }
     } catch (error) {
-      const st = error.response.status;
+      if (error.response && error.response.data) {
+        console.log("Server error message:", error.response.data.message);
+      } else {
+        console.log("Unexpected error:", error.message);
+      }
+      // const st = error.response.status;
 
-      console.log(st);
-      console.alert("Error occures");
+      // console.log(st);
+      // console.alert("Error occures");
     }
 
     // if (user === "Login") {
