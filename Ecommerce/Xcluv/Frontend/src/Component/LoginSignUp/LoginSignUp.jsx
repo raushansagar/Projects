@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react'
 import './LoginSignUp.css';
 import axios from "../../axios.js";
 import { StoreContext } from '../../StoreContext/StoreContext.jsx';
-import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 
@@ -27,7 +26,6 @@ const LoginSignUp = () => {
       if (user === "Login") {
 
         // User Login 
-
         const response = await axios.post("/login", { email, password });
 
         if (response.status === 200) {
@@ -39,10 +37,10 @@ const LoginSignUp = () => {
       }
       else {
 
+        // Register User
         const response = await axios.post("/register", { fullName, userName, email, password });
 
         if (response.status === 200) {
-          console.log(response.data);
           setUser("Login")
           toast.success("Account create successfully!");
         }
@@ -52,9 +50,7 @@ const LoginSignUp = () => {
       if (error.response) {
         const status = error.response.status;
         const backendMessage = error.response.data?.message || "Something went wrong";
-    
-        console.log("Status Code:", status);
-        console.log("Server error message:", backendMessage);
+
     
         if (status === 400) {
           toast.warn("All fields are required");
@@ -77,41 +73,9 @@ const LoginSignUp = () => {
       } else {
 
         // Network or unexpected error
-        console.log("Unexpected error:", error.message);
         toast.error("Network error or unexpected issue occurred");
       }
     }
-
-    // if (user === "Login") {
-
-    //   // Login User 
-
-    //   const response = await axios.post("/login", { email, password });
-    //   if (response.status === 200) {
-    //     localStorage.setItem("token", response.data.data.accessToken);
-    //     setToken(response.data.data.accessToken);
-    //     setLoginPopUp(true);
-    //   }
-    //   else {
-    //     console.log(response.data);
-    //     alert("Wrong Password");
-    //   }
-
-    // } else {
-
-    //   // Register User 
-    //   console.log(fullName, email, password);
-    //   try {
-    //     const response = await axios.post("/register", { fullName, userName, email, password });
-
-    //     console.log(response.data);
-    //     setUser("Login")
-    //     toast.success("Account create successfully!");
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // }
-
   };
 
   return (
