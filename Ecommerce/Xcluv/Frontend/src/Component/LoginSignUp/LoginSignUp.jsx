@@ -21,9 +21,9 @@ const LoginSignUp = () => {
 
     try {
       if (user === "Login") {
-        const response = await axios.post("/login", { email, password});
+        const response = await axios.post("/login", { email, password });
 
-        if (response.status === 200) {
+        if(response.status === 200){
           localStorage.setItem("token", response.data.data.accessToken);
           setToken(response.data.data.accessToken);
           setLoginPopUp(true);
@@ -35,7 +35,17 @@ const LoginSignUp = () => {
       } else {
         console.log(fullName, email, password);
         const response = await axios.post("/register", { fullName, userName, email, password });
-        toast.success("Create account successfully!");
+
+        console.log(response.data);
+        // if(response.status === 200){
+        //   localStorage.setItem("token", response.data.data.accessToken);
+        //   setToken(response.data.data.accessToken);
+        //   setLoginPopUp(true);
+        // }
+        // else {
+        //   alert("Wrong Password");
+        // }
+        // toast.success("Create account successfully!");
       }
     } catch (error) {
       const status = error.response?.status;
@@ -43,7 +53,7 @@ const LoginSignUp = () => {
 
       setToken("");
       localStorage.removeItem("token");
-      
+
       if (status === 400) {
         alert("All fields are required")
       }
