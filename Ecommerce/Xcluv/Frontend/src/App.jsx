@@ -17,14 +17,14 @@ import CurrentOrder from './Component/CurrentOrder/CurrentOrder';
 function App() {
   const { loginPopUp } = useContext(StoreContext);
   console.log(loginPopUp);
-  
+
   return (
     <div>
       {loginPopUp && <LoginSignUp />}
       <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />
-        {loginPopUp ? <Route path='/Shop' element={<DisplayItems />} /> : <Route path='/' element={<Home />} />}
+        {loginPopUp ? <Route path='/Shop' element={<DisplayItems />} /> : <Route path='/' element={<DisplayItems />} />}
         <Route path='/New' element={<Home />} />
         <Route path='/Offers' element={<NewArrivals />} />
         <Route path='/Contact' element={<Home />} />
