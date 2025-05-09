@@ -20,51 +20,35 @@ const LoginSignUp = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    try {
-      if (user === "Login") {
-        const response = await axios.post("/login", { email, password });
+    if (user === "Login") {
 
-        if(response.status === 200){
-          localStorage.setItem("token", response.data.data.accessToken);
-          setToken(response.data.data.accessToken);
-          setLoginPopUp(true);
-        }
-        else {
-          alert("Wrong Password");
-        }
+      // Login User 
+      const response = await axios.post("/login", { email, password });
 
-      } else {
-        console.log(fullName, email, password);
+      if (response.status === 200) {
+        localStorage.setItem("token", response.data.data.accessToken);
+        setToken(response.data.data.accessToken);
+        setLoginPopUp(true);
+      }
+      else {
+        alert("Wrong Password");
+      }
+
+    } else {
+
+      // Register User 
+      console.log(fullName, email, password);
+      try {
         const response = await axios.post("/register", { fullName, userName, email, password });
 
         console.log(response.data);
-        if(response.status === 200){
-          setUser("Login")
-          toast.success("Account create successfully!");
-        }
+        setUser("Login")
+        toast.success("Account create successfully!");
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      const status = error.response?.status;
-      const message = error.response?.data?.message;
-
-      setToken("");
-      localStorage.removeItem("token");
-
-      if (status === 400) {
-        alert("All fields are required")
-      }
-      if (status === 401) {
-        alert("Email || Username already exists");
-      } else if (status === 402) {
-        alert("Invalid email");
-      } else if (status === 403) {
-        alert("Password not match");
-      }
-      else {
-        alert(message || "Something went wrong");
-      }
-
     }
+
   };
 
   return (
