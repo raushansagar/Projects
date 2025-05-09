@@ -56,19 +56,26 @@ const LoginSignUp = () => {
         console.log("Status Code:", status);
         console.log("Server error message:", backendMessage);
     
-        // Optional: show different messages based on status code
         if (status === 400) {
-          toast.error("All fields are required");
-        } else if (status === 401) {
-          toast.warn("Invalid Email or Username already exists");
-        } else if (status === 403) {
-          toast.error("dsfs");
-        } else if (status === 500) {
-          toast.error("Server Error. Please try again later.");
-        } else {
+          toast.warn("All fields are required");
+        } 
+        else if (status === 401) {
+          toast.warn("Email or Username already exists");
+        } 
+        else if(status === 402){
+          toast.warn("Invalid email");
+        }
+        else if (status === 403) {
+          toast.warn("Password not match");
+        } 
+        else if (status === 500) {
+          toast.warn("Server Error. Please try again later.");
+        } 
+        else {
           toast.error(backendMessage);
         }
       } else {
+
         // Network or unexpected error
         console.log("Unexpected error:", error.message);
         toast.error("Network error or unexpected issue occurred");
