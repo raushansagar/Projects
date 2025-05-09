@@ -28,12 +28,13 @@ const LoginSignUp = () => {
       
       try {
         const response = await axios.post("/login", { email, password });
-        
+
         localStorage.setItem("token", response.data.data.accessToken);
         setToken(response.data.data.accessToken);
         setLoginPopUp(true);
       } catch (error) {
         console.log(error);
+        toast.error(error);
       }
     } else {
 
