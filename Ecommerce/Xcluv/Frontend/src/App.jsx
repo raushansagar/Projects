@@ -16,7 +16,8 @@ import CurrentOrder from './Component/CurrentOrder/CurrentOrder';
 
 function App() {
   const { loginPopUp } = useContext(StoreContext);
-
+  console.log(loginPopUp);
+  
   return (
     <div>
       {loginPopUp && <LoginSignUp />}
