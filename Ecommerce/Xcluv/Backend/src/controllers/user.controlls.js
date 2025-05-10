@@ -416,6 +416,11 @@ const placeOrder = asyncHandler(async (req, res) => {
         quantity,
     }));
 
+
+    return res.status(200).json(
+        new ApiResponse(200, { user: user},{formattedItems : formattedItems}, "Order placed successfully")
+    );
+
     try {
         const newOrder = await Order.create({
             userId : user._id,
@@ -428,10 +433,8 @@ const placeOrder = asyncHandler(async (req, res) => {
         throw new ApiError(402, "All fields are requisdsred");
     }
 
-    return res.status(200).json(
-        new ApiResponse(200, { user: user},{newOrder : newOrder}, "Order placed successfully")
-    );
     
+
     //Push order ID into user.orders
     try {
         await User.findByIdAndUpdate(user._id,{
