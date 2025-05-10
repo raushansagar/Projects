@@ -31,9 +31,9 @@ const generateRefereshAndAccessTokens = async (userId) => {
 // user register
 const registerUser = asyncHandler(async (req, res) => {
 
-    const { fullName, userName, email, password } = req.body;
+    const { fullName, email, password } = req.body;
 
-    console.log(fullName, userName, email, password);
+    console.log(fullName, email, password);
 
 
     if (
@@ -52,13 +52,11 @@ const registerUser = asyncHandler(async (req, res) => {
         throw new ApiError(401, "Email already exists");
     }
 
-
-    // const profileImgLocalPath = req.files?.profileImg?.[0]?.path;
-    // const profileImg = await uploadOnCoudinary(profileImgLocalPath);
+    const profileImgLocalPath = req.files?.profileImg?.[0]?.path;
+    const profileImg = await uploadOnCoudinary(profileImgLocalPath);
 
     const user = await User.create({
-        fullName : fullName || "",
-        userName: userName || "",
+        fullName : fullName,
         email: email.toLowerCase(),
         password,
         profileImg: "",

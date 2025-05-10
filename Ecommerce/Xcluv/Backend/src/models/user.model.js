@@ -208,11 +208,6 @@ const userSchema = new mongoose.Schema(
             required: true,
             trim: true,
         },
-        userName: {
-            type: String,
-            lowercase: true,
-            trim: true,
-        },
         email: {
             type: String,
             required: true,
