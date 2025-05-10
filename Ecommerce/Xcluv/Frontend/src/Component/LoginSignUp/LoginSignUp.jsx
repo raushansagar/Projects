@@ -47,10 +47,15 @@ const LoginSignUp = () => {
         // Register User
         const response = await axios.post("/register", { fullName, userName, email, password });
 
-        if (response.status === 200) {
-          setUser("Login")
-          toast.success("Account create successfully!");
-        }
+        if(response.status === 200) {
+            setUser("Login")
+            toast.update(toastId, {
+              render: "Account create successfully!",
+              type: "success",
+              isLoading: false,
+              autoClose: 3000
+            });
+          }
       }
 
     } catch (error) {
