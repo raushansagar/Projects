@@ -25,13 +25,13 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/Shop' element={loginPopUp ? <DisplayItems /> : <Home />} />
-        <Route path='/New' element={<Home />} />
-        <Route path='/Offers' element={<NewArrivals />} />
-        <Route path='/Contact' element={<Home />} />
-        <Route path='/showItems' element={<ItemsDetails />} />
-        <Route path='/cart' element={<Cart />} />
-        <Route path='/order' element={<Order />} />
-        <Route path='/orderPlaced' element = {<CurrentOrder/>} />
+        <Route path='/New' element={loginPopUp ? <Home /> : <Home />} />
+        <Route path='/Offers' element={loginPopUp ? <NewArrivals /> : <Home />} />
+        <Route path='/Contact' element={loginPopUp ? <Home /> : <Home/>} />
+        <Route path='/showItems' element={loginPopUp ? <ItemsDetails /> : <Home/>} />
+        <Route path='/cart' element={loginPopUp ? <Cart /> : <Home/>} />
+        <Route path='/order' element={loginPopUp ? <Order /> : <Home/>} />
+        <Route path='/orderPlaced' element = {loginPopUp ? <CurrentOrder/> : <Home/>} />
       </Routes>
       <Footer />
       <ToastContainer />
