@@ -16,8 +16,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
-  const { loginPopUp, getTotalCartAmount } = useContext(StoreContext);
-  console.log(getTotalCartAmount);
+  const { loginPopUp } = useContext(StoreContext);
 
   return (
     <div>
@@ -25,13 +24,13 @@ function App() {
       <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/Shop' element={loginPopUp ? <DisplayItems /> : <Home />} />
+        <Route path='/Shop' element={loginPopUp ? <DisplayItems /> : <DisplayItems />} />
         <Route path='/New' element={loginPopUp ? <Home /> : <Home />} />
         <Route path='/Offers' element={loginPopUp ? <NewArrivals /> : <Home />} />
         <Route path='/Contact' element={loginPopUp ? <Home /> : <Home/>} />
         <Route path='/showItems' element={loginPopUp ? <ItemsDetails /> : <Home/>} />
         <Route path='/cart' element={loginPopUp ? <Cart /> : <Home/>} />
-        <Route path='/order' element={loginPopUp && getTotalCartAmount > 0 ? <Order /> : <Home/>} />
+        <Route path='/order' element={loginPopUp ? <Order /> : <Home/>} />
         <Route path='/orderPlaced' element = {loginPopUp ? <CurrentOrder/> : <Home/>} />
       </Routes>
       <Footer />
