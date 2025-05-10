@@ -205,8 +205,6 @@ const userSchema = new mongoose.Schema(
     {
         fullName: {
             type: String,
-            required: true,
-            trim: true,
         },
         email: {
             type: String,
@@ -214,7 +212,6 @@ const userSchema = new mongoose.Schema(
             unique: true,
             lowercase: true,
             trim: true,
-            index: true,
         },
         password: {
             type: String,
