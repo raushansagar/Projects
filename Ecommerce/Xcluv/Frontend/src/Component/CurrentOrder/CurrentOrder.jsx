@@ -23,11 +23,8 @@ const CurrentOrder = () => {
                                 <p><strong>Status:</strong> {order.orderStatus}</p>
                             </div>
                             <div className="cart_bottom">
-                                <div class="progress">
-                                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
-                                </div>
                             </div>
-                            {/* <div className="total_cart">
+                            <div className="total_cart">
                                 <h4>Total: ₹{order.amount}</h4>
                                 <hr />
                                 <h4>Shipping Address:</h4>
@@ -35,7 +32,7 @@ const CurrentOrder = () => {
                                 <p>{order.address.city} - {order.address.zip}</p>
                                 <p>{order.address.country}</p>
                                 <p>Phone: {order.address.phone}</p>
-                            </div> */}
+                            </div>
                         </div>
                     </div>
                     <div className="cart_items_title">
