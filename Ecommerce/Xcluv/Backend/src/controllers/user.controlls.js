@@ -53,6 +53,8 @@ const registerUser = asyncHandler(async (req, res) => {
         new ApiResponse(200, "User Registered Successfully")
     );
 
+
+    
     // const profileImgLocalPath = req.files?.profileImg?.[0]?.path;
     // const profileImg = await uploadOnCoudinary(profileImgLocalPath);
 
