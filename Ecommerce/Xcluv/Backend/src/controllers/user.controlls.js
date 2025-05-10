@@ -49,6 +49,10 @@ const registerUser = asyncHandler(async (req, res) => {
         throw new ApiError(401, "Email already exists");
     }
 
+    return res.status(200).json(
+        new ApiResponse(200, "User Registered Successfully")
+    );
+
     // const profileImgLocalPath = req.files?.profileImg?.[0]?.path;
     // const profileImg = await uploadOnCoudinary(profileImgLocalPath);
 
@@ -58,7 +62,7 @@ const registerUser = asyncHandler(async (req, res) => {
         email: email.toLowerCase(),
         password,
         profileImg: "",
-        
+
     });
 
     const checkUser = await User.findById(user._id).select("-password -refreshToken");
