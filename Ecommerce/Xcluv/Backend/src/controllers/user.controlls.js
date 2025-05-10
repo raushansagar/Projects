@@ -434,9 +434,7 @@ const placeOrder = asyncHandler(async (req, res) => {
         $push: { orders: newOrder._id },
     });
 
-
     const orderPlaceItems = await Order.findById(newOrder._id);
-    //console.log(newOrder);
 
     return res.status(200).json(
         new ApiResponse(200, { order: newOrder }, "Order placed successfully")
@@ -468,8 +466,6 @@ const getOrder = asyncHandler(async (req, res) => {
     if (!allOrder) {
         throw new ApiError(401, "Order not found");
     }
-
-    // console.log(allOrder)
 
 
     return res
