@@ -33,10 +33,6 @@ const registerUser = asyncHandler(async (req, res) => {
 
     const { fullName, userName, email, password } = req.body;
 
-    return res.status(200).json(
-        new ApiResponse(200, checkUser,{fullName, userName, email, password}, "User Registered Successfully")
-    );
-
     if (
         [fullName, email, password].some((field) =>
             field?.trim() === "")
@@ -53,15 +49,16 @@ const registerUser = asyncHandler(async (req, res) => {
         throw new ApiError(401, "Email already exists");
     }
 
-    const profileImgLocalPath = req.files?.profileImg?.[0]?.path;
-    const profileImg = await uploadOnCoudinary(profileImgLocalPath);
+    // const profileImgLocalPath = req.files?.profileImg?.[0]?.path;
+    // const profileImg = await uploadOnCoudinary(profileImgLocalPath);
 
     const user = await User.create({
         fullName : fullName || "",
         userName: userName || "",
         email: email.toLowerCase(),
         password,
-        profileImg: profileImg?.url || "",
+        profileImg: "",
+        
     });
 
     const checkUser = await User.findById(user._id).select("-password -refreshToken");

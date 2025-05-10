@@ -64,6 +64,9 @@ const LoginSignUp = () => {
         const status = error.response.status;
         const backendMessage = error.response.data?.message || "Something went wrong";
 
+        console.log(status);
+        console.log(backendMessage);
+
 
         if (status === 400) {
           toast.update(toastId, {
