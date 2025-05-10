@@ -256,21 +256,6 @@ const addMenu = asyncHandler(async (req, res) => {
 // get product data
 const productData = asyncHandler(async (req, res) => {
 
-    const token =
-        req.cookies?.accessToken ||
-        req.header("Authorization")?.replace("Bearer ", "")?.trim();
-
-    if (!token) {
-        throw new ApiError(401, "Unauthorized request for finding product")
-    }
-
-    const decodeInfoToken = await jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
-    const newUser = await User.findById(decodeInfoToken?._id).select("-password -refreshToken");
-
-    if(!newUser){
-        throw new ApiError(401, "Unauthorized request for finding product")
-    }
-
     // get all product 
     const product = await Product.find({});
     if (!product) {
