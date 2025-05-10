@@ -404,9 +404,7 @@ const placeOrder = asyncHandler(async (req, res) => {
     //     new ApiResponse(200, { user: user }, "Order placed successfully")
     //     // throw new ApiError(401, "Unauthorized request");
     // }
-    return res.status(200).json(
-        new ApiResponse(200, { user: user }, "Order placed successfully")
-    );
+    
 
     if (!items || !address || !amount) {
         throw new ApiError(400, "All fields are required");
@@ -430,7 +428,10 @@ const placeOrder = asyncHandler(async (req, res) => {
         throw new ApiError(402, "All fields are requisdsred");
     }
 
-
+    return res.status(200).json(
+        new ApiResponse(200, { user: user},{newOrder : newOrder}, "Order placed successfully")
+    );
+    
     //Push order ID into user.orders
     try {
         await User.findByIdAndUpdate(user._id,{
