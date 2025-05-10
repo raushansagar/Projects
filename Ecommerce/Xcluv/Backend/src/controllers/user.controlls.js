@@ -400,9 +400,13 @@ const placeOrder = asyncHandler(async (req, res) => {
     const decodeInfoToken = await jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
     const user = await User.findById(decodeInfoToken?._id).select("-password -refreshToken");
 
-    if(!user){
-        throw new ApiError(401, "Unauthorized request");
-    }
+    // if(user){
+    //     new ApiResponse(200, { user: user }, "Order placed successfully")
+    //     // throw new ApiError(401, "Unauthorized request");
+    // }
+    return res.status(200).json(
+        new ApiResponse(200, { user: user }, "Order placed successfully")
+    );
 
     if (!items || !address || !amount) {
         throw new ApiError(400, "All fields are required");
