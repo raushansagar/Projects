@@ -406,9 +406,9 @@ const placeOrder = asyncHandler(async (req, res) => {
     // }
 
 
-    if (!items || !address || !amount) {
-        throw new ApiError(400, "All fields are required");
-    }
+    // if (!items || !address || !amount) {
+    //     throw new ApiError(400, "All fields are required");
+    // }
 
 
     return res.status(200).json(
