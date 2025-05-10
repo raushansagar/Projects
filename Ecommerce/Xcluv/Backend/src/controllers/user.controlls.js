@@ -41,12 +41,12 @@ const registerUser = asyncHandler(async (req, res) => {
     }
 
     const exitedUser = await User.findOne({
-        $or: [{ email: email.toLowerCase() }]
+        email: email.toLowerCase(),
     });
 
 
     if (exitedUser) {
-        throw new ApiError(401, "Email or Username already exists");
+        throw new ApiError(401, "Email already exists");
     }
 
     const profileImgLocalPath = req.files?.profileImg?.[0]?.path;
