@@ -32,6 +32,7 @@ const Order = () => {
     try {
       const shippingCost = getTotalCartAmount() > 0 ? 45 : 0;
       const amount = getTotalCartAmount() + shippingCost;
+      const toastId = toast.loading("Processing...");
 
       const token = localStorage.getItem("token");
 
@@ -49,13 +50,21 @@ const Order = () => {
         }
       );
 
-      console.log(response.data);
-
-      toast.success("Order placed successfully!");
+      toast.update(toastId, {
+        render: "Order placed successfully!",
+        type: "success",
+        isLoading: false,
+        autoClose: 3000
+      });
       setCartItems({});
     } catch (error) {
       console.log(error);
-      toast.error("Order Failed!");
+      toast.update(toastId, {
+        render: "Order Failed!",
+        type: "error",
+        isLoading: false,
+        autoClose: 3000
+      });
     }
   };
 
