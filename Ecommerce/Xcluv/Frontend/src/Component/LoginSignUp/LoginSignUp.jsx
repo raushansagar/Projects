@@ -19,7 +19,7 @@ const LoginSignUp = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
+    const toastId = toast.loading("Processing...");
 
     try {
 
@@ -31,7 +31,14 @@ const LoginSignUp = () => {
         if (response.status === 200) {
           localStorage.setItem("token", response.data.data.accessToken);
           setToken(response.data.data.accessToken);
-          toast.success("Login successfully!");
+
+          toast.update(toastId, {
+            render: "Login successfully!",
+            type: "success",
+            isLoading: false,
+            autoClose: 3000
+          });
+
           setLoginPopUp(true);
         }
       }
@@ -51,22 +58,22 @@ const LoginSignUp = () => {
         const status = error.response.status;
         const backendMessage = error.response.data?.message || "Something went wrong";
 
-    
+
         if (status === 400) {
           toast.warn("All fields are required");
-        } 
+        }
         else if (status === 401) {
           toast.warn("Email or Username already exists");
-        } 
-        else if(status === 402){
+        }
+        else if (status === 402) {
           toast.warn("Invalid email");
         }
         else if (status === 403) {
           toast.warn("Password not match");
-        } 
+        }
         else if (status === 500) {
           toast.warn("Server Error. Please try again later.");
-        } 
+        }
         else {
           toast.error(backendMessage);
         }
