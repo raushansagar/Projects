@@ -24,7 +24,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/Shop' element={loginPopUp ? <DisplayItems /> : <DisplayItems />} />
+        <Route path='/Shop' element={loginPopUp ? <DisplayItems /> : <Home />} />
         <Route path='/New' element={loginPopUp ? <Home /> : <Home />} />
         <Route path='/Offers' element={loginPopUp ? <NewArrivals /> : <Home />} />
         <Route path='/Contact' element={loginPopUp ? <Home /> : <Home/>} />
