@@ -404,11 +404,16 @@ const placeOrder = asyncHandler(async (req, res) => {
     //     new ApiResponse(200, { user: user }, "Order placed successfully")
     //     // throw new ApiError(401, "Unauthorized request");
     // }
-    
+
 
     if (!items || !address || !amount) {
         throw new ApiError(400, "All fields are required");
     }
+
+
+    return res.status(200).json(
+        new ApiResponse(200, { items: items }, { address: address },{amount, amount}, "Order placed successfully")
+    );
 
     // Convert {productId: quantity} into [{productId, quantity}]
     const formattedItems = Object.entries(items).map(([productId, quantity]) => ({
@@ -417,32 +422,26 @@ const placeOrder = asyncHandler(async (req, res) => {
     }));
 
 
-    return res.status(200).json(
-        new ApiResponse(200, { user: user},{formattedItems : formattedItems}, "Order placed successfully")
-    );
-
-    try {
-        const newOrder = await Order.create({
-            userId : user._id,
-            items: formattedItems,
-            address,
-            amount,
-            orderStatus: "Processing"
-        });
-    } catch (error) {
-        throw new ApiError(402, "All fields are requisdsred");
-    }
-
     
 
+    const newOrder = await Order.create({
+        userId: user._id,
+        items: formattedItems,
+        address,
+        amount,
+        orderStatus: "Processing"
+    });
+
+
+
     //Push order ID into user.orders
-    try {
-        await User.findByIdAndUpdate(user._id,{
-            $push: { orders: newOrder._id},
-        });
-    } catch (error) {
-        throw new ApiError(403, "All fields are requisdsred");
-    }
+    await User.findByIdAndUpdate(user._id, {
+        $push: { orders: newOrder._id },
+    });
+
+
+
+
 
     // const orderPlaceItems = await Order.findById(newOrder._id);
     //console.log(newOrder);
@@ -468,7 +467,7 @@ const getOrder = asyncHandler(async (req, res) => {
     const decodeInfoToken = await jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
     const newUser = await User.findById(decodeInfoToken?._id).select("-password -refreshToken");
 
-    if(!newUser){
+    if (!newUser) {
         throw new ApiError(401, "Unauthorized request");
     }
 
