@@ -49,6 +49,8 @@ const Order = () => {
         }
       );
 
+      console.log(response.data);
+
       toast.success("Order placed successfully!");
       setCartItems({});
     } catch (error) {
