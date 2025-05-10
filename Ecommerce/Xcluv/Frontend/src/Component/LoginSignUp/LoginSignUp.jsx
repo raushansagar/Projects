@@ -38,7 +38,6 @@ const LoginSignUp = () => {
             isLoading: false,
             autoClose: 3000
           });
-
           setLoginPopUp(true);
         }
       }
@@ -47,15 +46,15 @@ const LoginSignUp = () => {
         // Register User
         const response = await axios.post("/register", { fullName, userName, email, password });
 
-        if(response.status === 200) {
-            setUser("Login")
-            toast.update(toastId, {
-              render: "Account create successfully!",
-              type: "success",
-              isLoading: false,
-              autoClose: 3000
-            });
-          }
+        if (response.status === 200) {
+          setUser("Login")
+          toast.update(toastId, {
+            render: "Account create successfully!",
+            type: "success",
+            isLoading: false,
+            autoClose: 3000
+          });
+        }
       }
 
     } catch (error) {
@@ -65,27 +64,62 @@ const LoginSignUp = () => {
 
 
         if (status === 400) {
-          toast.warn("All fields are required");
+          toast.update(toastId, {
+            render: "All fields are required",
+            type: "warn",
+            isLoading: false,
+            autoClose: 3000
+          });
         }
         else if (status === 401) {
-          toast.warn("Email or Username already exists");
+          toast.update(toastId, {
+            render: "Email or Username already exists",
+            type: "warn",
+            isLoading: false,
+            autoClose: 3000
+          });
         }
         else if (status === 402) {
-          toast.warn("Invalid email");
+          toast.update(toastId, {
+            render: "Invalid email",
+            type: "warn",
+            isLoading: false,
+            autoClose: 3000
+          });
         }
         else if (status === 403) {
-          toast.warn("Password not match");
+          toast.update(toastId, {
+            render: "Password not match",
+            type: "warn",
+            isLoading: false,
+            autoClose: 3000
+          });
         }
         else if (status === 500) {
-          toast.warn("Server Error. Please try again later.");
+          toast.update(toastId, {
+            render: "Server Error. Please try again later.",
+            type: "error",
+            isLoading: false,
+            autoClose: 3000
+          });
         }
         else {
-          toast.error(backendMessage);
+          toast.update(toastId, {
+            render: backendMessage,
+            type: "error",
+            isLoading: false,
+            autoClose: 3000
+          });
         }
       } else {
 
         // Network or unexpected error
-        toast.error("Network error or unexpected issue occurred");
+        toast.update(toastId, {
+            render: "Network error or unexpected issue occurred",
+            type: "error",
+            isLoading: false,
+            autoClose: 3000
+          });
       }
     }
   };
