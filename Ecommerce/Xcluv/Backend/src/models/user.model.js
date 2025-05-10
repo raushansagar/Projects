@@ -210,7 +210,6 @@ const userSchema = new mongoose.Schema(
         },
         userName: {
             type: String,
-            unique: true,
             lowercase: true,
             trim: true,
         },
