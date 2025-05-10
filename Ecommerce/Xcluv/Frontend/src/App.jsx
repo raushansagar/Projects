@@ -17,7 +17,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const { loginPopUp } = useContext(StoreContext);
-  console.log(loginPopUp);
 
   return (
     <div>
