@@ -46,6 +46,8 @@ const LoginSignUp = () => {
         // Register User
         const response = await axios.post("/register", { fullName, userName, email, password });
 
+
+        console.log(response.data);
         if (response.status === 200) {
           setUser("Login")
           toast.update(toastId, {
