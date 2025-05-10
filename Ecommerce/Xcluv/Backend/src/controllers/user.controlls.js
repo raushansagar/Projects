@@ -33,45 +33,45 @@ const registerUser = asyncHandler(async (req, res) => {
 
     const { fullName, userName, email, password } = req.body;
 
-    if (
-        [fullName, email, password].some((field) =>
-            field?.trim() === "")
-    ) {
-        throw new ApiError(400, "All fields are required");
-    }
+    // if (
+    //     [fullName, email, password].some((field) =>
+    //         field?.trim() === "")
+    // ) {
+    //     throw new ApiError(400, "All fields are required");
+    // }
 
-    const exitedUser = await User.findOne({
-        email: email.toLowerCase(),
-    });
-
-
-    if (exitedUser) {
-        throw new ApiError(401, "Email already exists");
-    }
-
-    return res.status(200).json(
-        new ApiResponse(200, "User Registered Successfully")
-    );
+    // const exitedUser = await User.findOne({
+    //     email: email.toLowerCase(),
+    // });
 
 
-    
-    // const profileImgLocalPath = req.files?.profileImg?.[0]?.path;
-    // const profileImg = await uploadOnCoudinary(profileImgLocalPath);
+    // if (exitedUser) {
+    //     throw new ApiError(401, "Email already exists");
+    // }
 
-    const user = await User.create({
-        fullName : fullName || "",
-        userName: userName || "",
-        email: email.toLowerCase(),
-        password,
-        profileImg: "",
+    // return res.status(200).json(
+    //     new ApiResponse(200, "User Registered Successfully")
+    // );
 
-    });
 
-    const checkUser = await User.findById(user._id).select("-password -refreshToken");
 
-    if (!checkUser) {
-        throw new ApiError(500, "Something went wrong while registering the user");
-    }
+    // // const profileImgLocalPath = req.files?.profileImg?.[0]?.path;
+    // // const profileImg = await uploadOnCoudinary(profileImgLocalPath);
+
+    // const user = await User.create({
+    //     fullName : fullName || "",
+    //     userName: userName || "",
+    //     email: email.toLowerCase(),
+    //     password,
+    //     profileImg: "",
+
+    // });
+
+    // const checkUser = await User.findById(user._id).select("-password -refreshToken");
+
+    // if (!checkUser) {
+    //     throw new ApiError(500, "Something went wrong while registering the user");
+    // }
 
     return res.status(200).json(
         new ApiResponse(200, checkUser, "User Registered Successfully")
