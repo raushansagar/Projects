@@ -73,7 +73,7 @@ const LoginSignUp = () => {
         }
         else if (status === 401) {
           toast.update(toastId, {
-            render: "Email or Username already exists",
+            render: "Email already exists",
             type: "warn",
             isLoading: false,
             autoClose: 3000

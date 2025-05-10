@@ -53,8 +53,8 @@ const registerUser = asyncHandler(async (req, res) => {
     const profileImg = await uploadOnCoudinary(profileImgLocalPath);
 
     const user = await User.create({
-        fullName,
-        userName: userName.toLowerCase(),
+        fullName : fullName || "",
+        userName: userName || "",
         email: email.toLowerCase(),
         password,
         profileImg: profileImg?.url || "",
