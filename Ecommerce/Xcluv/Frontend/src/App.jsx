@@ -16,7 +16,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
-  const { loginPopUp } = useContext(StoreContext);
+  const { loginPopUp, getTotalCartAmount } = useContext(StoreContext);
+  console.log(getTotalCartAmount);
 
   return (
     <div>
@@ -30,7 +31,7 @@ function App() {
         <Route path='/Contact' element={loginPopUp ? <Home /> : <Home/>} />
         <Route path='/showItems' element={loginPopUp ? <ItemsDetails /> : <Home/>} />
         <Route path='/cart' element={loginPopUp ? <Cart /> : <Home/>} />
-        <Route path='/order' element={loginPopUp ? <Order /> : <Home/>} />
+        <Route path='/order' element={loginPopUp && getTotalCartAmount > 0 ? <Order /> : <Home/>} />
         <Route path='/orderPlaced' element = {loginPopUp ? <CurrentOrder/> : <Home/>} />
       </Routes>
       <Footer />
