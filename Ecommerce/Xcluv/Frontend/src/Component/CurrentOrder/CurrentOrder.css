@@ -1,13 +1,12 @@
-/* CurrentOrder.css */
 
-/* Base Styles */
+
 .cart {
   padding: 1rem;
   width: 100%;
 }
 
 /* Heading */
-h2 {
+.cart h2 {
   text-align: center;
   color: #1e293b;
   margin: 1.5rem 0;
