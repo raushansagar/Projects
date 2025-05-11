@@ -29,7 +29,6 @@ const CurrentOrder = () => {
 
     return (
         <div className="cart">
-<<<<<<< HEAD
             <h2>Your Orders</h2>
             {filterOrder.slice().reverse().map((order) => {
                 const { width, color, textColor } = getProgressInfo(order.orderStatus);
@@ -78,32 +77,6 @@ const CurrentOrder = () => {
                                         {width}
                                     </div>
                                 </div>
-=======
-            sagar
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-            <h2> Your Orders</h2>
-            {filterOrder.map((order) => (
-                <div key={order._id} className="order-card">
-                    <div className="order_info">
-                        <div className="order-header">
-                            <div>
-                                <p><strong>Order ID:</strong> {order._id}</p>
-                                <p><strong>Placed On:</strong> {new Date(order.createdAt).toLocaleString()}</p>
-                                <p><strong>Status:</strong> {order.orderStatus}</p>
-                            </div>
-                            <div className="cart_bottom">
-                            </div>
-                            <div className="total_cart">
-                                <h4>Total: ₹{order.amount}</h4>
-                                <hr />
-                                <h4>Shipping Address:</h4>
-                                <p>{order.address.fullName}</p>
-                                <p>{order.address.city} - {order.address.zip}</p>
-                                <p>{order.address.country}</p>
-                                <p>Phone: {order.address.phone}</p>
->>>>>>> 53b626a (d)
                             </div>
                         </div>
 
