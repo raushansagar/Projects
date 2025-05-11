@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import './CurrentOrder.css';
-import 'bootstrap/dist/css/bootstrap.min.css'; // Ensure Bootstrap is imported
 import { StoreContext } from '../../StoreContext/StoreContext';
 
 const CurrentOrder = () => {
