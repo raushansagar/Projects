@@ -40,7 +40,7 @@ export const ContextProvider = (props) => {
         const token = localStorage.getItem("token");
 
         const response = await axios.post(
-            'https://xcluv-backend.onrender.com/xcluv/v2/users/getProduct',
+            '/getProduct',
             {
                 headers: {
                     Authorization: `Bearer ${token}`,
