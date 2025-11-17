@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import { io } from "socket.io-client";
 import { StoreContext } from "../StoreContext/StoreContext";
+const url = import.meta.env.VITE_API_URL1;
 
 const SocketContext = React.createContext(null);
 
@@ -47,7 +48,9 @@ export const SocketProvider = ({ children }) => {
       socketRef.current = null;
     }
 
-    const socket = io("http://localhost:8081", {
+
+    // add url 
+    const socket = io(url,{
       auth: { token },
       transports: ["websocket"],
       reconnection: true,

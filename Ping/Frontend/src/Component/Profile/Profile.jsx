@@ -7,7 +7,6 @@ import Footer from '../Footer/Footer';
 const Profile = () => {
 
     const { user, allUser } = useContext(StoreContext);
-    console.log(user);
 
     return (
         <>
