@@ -1,0 +1,245 @@
+.signup-container {
+    height: 100vh;
+    width: 100vw;
+    background: linear-gradient(135deg, #2E333D, #5A5F72, #7A8090);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.signup-card {
+    width: 400px;
+    background: linear-gradient(135deg, #2E333D, #5A5F72, #7A8090);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 30px;
+    border-radius: 13px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.signup-card h2 {
+    color: #ffffff;
+    margin-bottom: 25px;
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.input-group {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 15px;
+    animation: slideIn 0.3s ease;
+}
+
+.input-group input {
+    width: 100%;
+    height: 50px;
+    padding: 0 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease;
+    background-color: #ffffff;
+}
+
+.input-group input:focus {
+    border: 2px solid #96ACC0;
+    background-color: #ffffff;
+}
+
+.input-group input::placeholder {
+    color: #2E333D;
+    opacity: 0.7;
+}
+
+/* File Input Styles */
+.file-input {
+    flex-direction: column;
+    align-items: flex-start;
+    background: transparent;
+    padding: 10px 0;
+}
+
+.file-input label {
+    color: #ffffff;
+    margin-bottom: 8px;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.file-input input[type="file"] {
+    width: 100%;
+    height: auto;
+    padding: 8px;
+    background-color: #ffffff;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.file-input input[type="file"]:hover {
+    background-color: #f8f9fa;
+}
+
+.file-input input[type="file"]:focus {
+    border: 2px solid #96ACC0;
+}
+
+/* Submit Button */
+.submit-btn {
+    width: 100%;
+    padding: 14px;
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    background-color: #93a8bc;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.submit-btn:hover {
+    background-color: #7b95a5;
+    transform: scale(1.03);
+}
+
+.submit-btn:disabled {
+    background-color: #5A5F72;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Resend Button */
+.resend-btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    border: 2px solid #96ACC0;
+    border-radius: 8px;
+    background-color: transparent;
+    color: #96ACC0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.resend-btn:hover {
+    background-color: #96ACC0;
+    color: #2E333D;
+    transform: scale(1.03);
+}
+
+/* Step Transitions */
+.signup-card > * {
+    animation: fadeIn 0.5s ease;
+}
+
+
+.signup-footer {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.signup-footer span {
+    margin-left: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #96ACC0;
+    transition: color 0.3s ease;
+}
+
+.signup-footer span:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .signup-card {
+        width: 90vw;
+        margin: 20px;
+        padding: 30px 20px;
+    }
+
+    .signup-card h2 {
+        font-size: 22px;
+    }
+
+    .input-group input {
+        height: 45px;
+        font-size: 15px;
+    }
+
+    .submit-btn, .resend-btn {
+        padding: 12px;
+    }
+}
+
+
+/* Form styling */
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Back button or step indicator could be added later */
+.step-indicator {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+.step-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #5A5F72;
+    transition: background-color 0.3s ease;
+}
+
+.step-dot.active {
+    background-color: #96ACC0;
+}

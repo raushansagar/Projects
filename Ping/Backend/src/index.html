@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket.IO Test</title>
+</head>
+<body>
+    <h1>Socket.IO Test</h1>
+    <input type="text" id="messageInput" placeholder="Type a message" />
+    <button id="sendBtn">Send</button>
+
+    <ul id="messages"></ul>
+
+    <script src="https://cdn.socket.io/4.7.1/socket.io.min.js"></script>
+    <script>
+        const socket = io("http://localhost:8080"); // replace with your port
+
+        const sendBtn = document.getElementById("sendBtn");
+        const input = document.getElementById("messageInput");
+        const messages = document.getElementById("messages");
+
+        sendBtn.addEventListener("click", () => {
+            const msg = input.value;
+            socket.emit("message", msg);
+            input.value = "";
+        });
+
+        socket.on("message", (data) => {
+            const li = document.createElement("li");
+            li.textContent = data;
+            messages.appendChild(li);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+.video-call-wrapper {
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #222;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.7);
+  z-index: 10000;
+  width: 90vw;
+  max-width: 1000px;
+  color: white;
+}
+
+.video-card {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.remote-video {
+  width: 65%;
+  background: black;
+  border-radius: 10px;
+}
+
+.local-video {
+  width: 30%;
+  background: black;
+  border-radius: 10px;
+  border: 2px solid #4caf50;
+}
+
+.call-controls {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.control-btn {
+  background: #4caf50;
+  border: none;
+  padding: 10px 18px;
+  font-size: 14px;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  min-width: 120px;
+}
+
+.control-btn:hover {
+  background: #45a049;
+}
+
+.control-btn.muted {
+  background: #f44336;
+}
+
+.control-btn.muted:hover {
+  background: #da190b;
+}
+
+.end-call {
+  background: #f44336;
+  border: none;
+  padding: 10px 18px;
+  font-size: 14px;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  min-width: 120px;
+}
+
+.end-call:hover {
+  background: #da190b;
+}

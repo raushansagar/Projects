@@ -1,0 +1,177 @@
+.Login-container {
+    height: 100vh;
+    width: 100%;
+    background: linear-gradient(135deg, #2E333D, #5A5F72, #7A8090);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 40px;
+}
+
+.Login-card {
+    width: 370px;
+    background: linear-gradient(135deg, #2E333D, #5A5F72, #7A8090);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 35px 25px;
+    border-radius: 13px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.Login-logo {
+    margin: 10px 0;
+    font-weight: 550;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Login-logo ion-icon {
+    font-size: 43px;
+    color: #96ACC0;
+    margin-bottom: 15px;
+}
+
+.Login-footer {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Login-form {
+    width: 100%;
+}
+
+.Login-input {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    animation: slideIn 0.3s ease;
+}
+
+.Login-input input {
+    width: 100%;
+    height: 50px;
+    padding: 0 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease;
+    background-color: #ffffff;
+}
+
+.Login-input input:focus {
+    border: 2px solid #96ACC0;
+    background-color: #ffffff;
+}
+
+.Login-input input::placeholder {
+    color: #2E333D;
+    opacity: 0.7;
+}
+
+
+.sp2{
+    cursor: pointer;
+}
+
+.Login-footer .sp2 {
+    margin-left: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #96ACC0;
+    transition: color 0.3s ease;
+}
+
+.Login-footer .sp2:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+/* Login Button */
+.Login-btn {
+    width: 100%;
+    padding: 14px;
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    background-color: #93a8bc;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.Login-btn:hover {
+    background-color: #7b95a5;
+    transform: scale(1.03);
+}
+
+.Login-btn:disabled {
+    background-color: #5A5F72;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Social Icons */
+.Login-icons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.Login-icons ion-icon {
+    font-size: 24px;
+    color: #96ACC0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.Login-icons ion-icon:hover {
+    color: #ffffff;
+    transform: scale(1.2);
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .Login-card {
+        width: 90vw;
+        margin: 20px;
+        padding: 25px 15px;
+    }
+
+    .Login-input input {
+        height: 45px;
+        font-size: 15px;
+    }
+
+    .Login-btn {
+        padding: 12px;
+    }
+}
+
+/* Subtle Input Animation */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

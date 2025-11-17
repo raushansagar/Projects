@@ -1,0 +1,71 @@
+.incoming-call-popup {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  border: 2px solid #4caf50;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  padding: 20px 30px;
+  width: 320px;
+  z-index: 10000;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  text-align: center;
+}
+
+.caller-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.caller-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #4caf50;
+}
+
+.caller-text {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.call-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.btn {
+  padding: 10px 24px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.btn.accept {
+  background-color: #4caf50;
+  color: white;
+}
+
+.btn.accept:hover {
+  background-color: #45a049;
+}
+
+.btn.reject {
+  background-color: #f44336;
+  color: white;
+}
+
+.btn.reject:hover {
+  background-color: #da190b;
+}

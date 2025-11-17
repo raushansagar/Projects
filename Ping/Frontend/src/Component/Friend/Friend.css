@@ -1,0 +1,40 @@
+
+
+
+
+.allUserFriend{
+    display: flex;
+    flex-direction: col;    /* stack friends vertically */
+    border-radius: 50px 12px 12px 50px;
+    gap: 5px;
+    background-color: #5B6271;
+}
+
+.allUserFriend img{
+    height: 65px;
+    width: 85px;
+    /* border-radius: 12px 0px 0px 12px; */
+    border-radius: 50%;
+    border: 1px solid #ffffff;
+}
+
+.online{
+    height: 5px;
+    width: 5px;
+    border-radius: 50%;
+    background-color: #43C058;
+}
+
+.profileFriend{
+    width: 100%;
+    height: auto;
+    padding: 9px;
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.profileFriend p{
+    color: #fff;
+    font-weight: 550;
+}

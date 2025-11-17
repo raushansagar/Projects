@@ -1,0 +1,102 @@
+/* Container centering with dark background */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  background: #0d1117; /* dark background */
+  border-radius: 15px;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+/* Logo letters + icon container */
+.loading-logo {
+  font-size: 5rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+/* Letter colors */
+.p { color: #ea4335; }  /* red */
+.i { color: #34a853; }  /* green */
+.n { color: #fbbc05; }  /* yellow */
+.g { color: #4285f4; }  /* blue */
+
+/* Animate letters individually */
+.loading-logo span {
+  animation: bounce 1.8s infinite ease-in-out;
+}
+
+.loading-logo span:nth-child(1) { animation-delay: 0s; }
+.loading-logo span:nth-child(2) { animation-delay: 0.2s; }
+.loading-logo span:nth-child(3) { animation-delay: 0.4s; }
+.loading-logo span:nth-child(4) { animation-delay: 0.6s; }
+
+/* Chat bubble container */
+.chat-icon {
+  width: 60px;
+  height: 60px;
+  border: 3px solid #96acc0;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
+  background-color: #0d1117;
+  animation: bounce-glow 1.2s infinite ease-in-out;
+}
+
+/* Dots inside bubble */
+.dot {
+  width: 10px;
+  height: 10px;
+  background-color: #34a853; /* green like "i" */
+  border-radius: 50%;
+  margin: 0 4px;
+  animation: bounce-dot 1.2s infinite ease-in-out;
+}
+
+.dot1 { animation-delay: 0s; }
+.dot2 { animation-delay: 0.2s; }
+.dot3 { animation-delay: 0.4s; }
+
+/* Loading text below logo */
+.loading-text {
+  margin-top: 15px;
+  color: #d9d9d9;
+  font-size: 18px;
+  letter-spacing: 1px;
+  animation: pulse 1.2s infinite ease-in-out;
+}
+
+/* Animations */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+@keyframes bounce-glow {
+  0%, 100% { transform: translateY(0); box-shadow: 0 0 10px #96acc0; }
+  50% { transform: translateY(-10px); box-shadow: 0 0 20px #96acc0; }
+}
+
+@keyframes bounce-dot {
+  0%, 100% { transform: translateY(0); opacity: 0.6; }
+  50% { transform: translateY(-8px); opacity: 1; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}

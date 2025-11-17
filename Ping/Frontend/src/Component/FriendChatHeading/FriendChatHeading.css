@@ -1,0 +1,46 @@
+
+.friend-chat-heading-details{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 15px;
+    align-items: center;
+}
+
+.friend-imgae-name-details{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.friend-imgae-name-details img{
+    height: 60px;
+    width: 60px;
+}
+
+.riend-imgae-name-details h4{
+    font-size: 14;
+    font-weight: 500;
+}
+
+.userName-Member{
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+}
+
+.userName-Member p{
+    font-size: 10px;
+}
+
+
+.userDetailsIcon{
+    display: flex;
+    gap: 15px;
+}
+
+.userDetailsIcon ion-icon{
+    font-size: 22px;
+    color: #fff;
+    cursor: pointer;
+}
