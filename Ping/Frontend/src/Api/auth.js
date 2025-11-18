@@ -112,7 +112,7 @@ const logoutUser = async () => {
   try {
     await api.post("/logout", {}, { withCredentials: true });
     localStorage.removeItem("accessToken");
-    window.location.href = "/login"; 
+    window.location.href = "/"; 
   } catch (err) {
     console.error("Logout Error:", err.response?.data || err.message);
   }
