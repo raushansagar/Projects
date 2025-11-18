@@ -76,7 +76,7 @@ api.interceptors.response.use(
                 processQueue(err, null);
                 localStorage.removeItem("accessToken");
                 logoutUser();
-                alert("Session expired. Please login again.");
+                // alert("Session expired. Please login again.");
                 window.location.href = "/login"; // or use router navigation
                 return Promise.reject(err);
             } finally {
