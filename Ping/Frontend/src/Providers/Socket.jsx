@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import { io } from "socket.io-client";
 import { StoreContext } from "../StoreContext/StoreContext";
-const url = import.meta.env.VITE_API_URL1;
+const url = import.meta.env.VITE_API_URL4;
 
 const SocketContext = React.createContext(null);
 

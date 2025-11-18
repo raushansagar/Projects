@@ -2,7 +2,7 @@
 import axios from "axios";
 import { logoutUser } from "./auth.js";
 
-const url = import.meta.env.VITE_API_URL1;
+const url = import.meta.env.VITE_API_URL3;
 
 // Create Axios instance
 const api = axios.create({
