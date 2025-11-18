@@ -5,6 +5,7 @@ import { StoreContext } from "../../StoreContext/StoreContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import LoadingMessage from "../LoadingMessage/LoadingMessage";
+import loginlogo from '../../assets/loginlogo.png'
 
 const Login = () => {
   const { login, setLogin, loading, setLoading } = useContext(StoreContext);
@@ -104,6 +105,7 @@ const Login = () => {
           </div>
         </div>
       )}
+      <img className="loginlogo" src={loginlogo} alt="logo" />
     </div>
   );
 };

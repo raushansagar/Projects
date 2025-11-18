@@ -34,7 +34,7 @@ function App() {
   } = useSocket();
 
   return (
-    <>
+    <div className="login-home">
       <ToastContainer
         position="top-right"
         autoClose={3000}
@@ -87,7 +87,7 @@ function App() {
       </Routes>
 
       {!isLoggedIn && <Footer />}
-    </>
+    </div>
   );
 }
 
