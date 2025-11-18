@@ -1,7 +1,5 @@
-import { emit } from "process";
 import api from "./api";
 import { toast } from "react-toastify";
-
 
 // ======================= AUTH =======================
 
@@ -17,10 +15,9 @@ const loginUser = async (identifier, password) => {
     localStorage.setItem("accessToken", accessToken);
     return { accessToken, user, message };
   } catch (err) {
-    // toast.error(errorMsg, { position: "top-right", autoClose: 2000, theme: "colored" });
-    console.error("Login Error:", err.response?.data || err.message);
-    //window.location.href = "/login"; 
-    //throw err.response?.data || { message: err.message || "Login failed" };
+    const errorMsg = err.response?.data?.message || "Login failed";
+    toast.error(errorMsg, { position: "top-right", autoClose: 3000, theme: "colored" });
+    throw err;
   }
 };
 
@@ -29,33 +26,37 @@ const registerUser = async (formData) => {
   try {
     const response = await api.post("/register", formData, {
       withCredentials: true,
-      // DO NOT set Content-Type; let axios handle it
     });
-
     const { accessToken, user, message } = response.data;
     localStorage.setItem("accessToken", accessToken);
     return { accessToken, user, message };
   } catch (err) {
-    console.error("Register Error:", err.response?.data || err.message);
-    throw err.response?.data || { message: err.message || "Registration failed" };
+    const errorMsg = err.response?.data?.message || "Registration failed";
+    toast.error(errorMsg, { position: "top-right", autoClose: 3000, theme: "colored" });
+    throw err;
   }
 };
 
+// Helper: get Authorization headers
+const getAuthHeaders = () => {
+  const token = localStorage.getItem("accessToken");
+  if (!token) return null;
+  return { Authorization: `Bearer ${token}` };
+};
 
 // ======================= FETCH USER =======================
 
-// Fetch Logged-in User (if token exists)
 const fetchUser = async () => {
-  const token = localStorage.getItem("accessToken");
-  if (!token) return null;
+  const headers = getAuthHeaders();
+  if (!headers) return null;
 
   try {
     const response = await api.post(
       "/fetchUser",
       {},
       {
-        headers: { Authorization: `Bearer ${token}` },
-        withCredentials: true
+        headers,
+        withCredentials: true,
       }
     );
     return response.data;
@@ -68,21 +69,19 @@ const fetchUser = async () => {
   }
 };
 
-// Fetch All Users (if token exists)
 const fetchAllUser = async () => {
-  const token = localStorage.getItem("accessToken");
-  if (!token) return [];
+  const headers = getAuthHeaders();
+  if (!headers) return [];
 
   try {
     const response = await api.post(
       "/fetchAllUser",
       {},
       {
-        headers: { Authorization: `Bearer ${token}` },
-        withCredentials: true
+        headers,
+        withCredentials: true,
       }
     );
-
     return response.data.data;
   } catch (err) {
     if (err.response?.status === 401) {
@@ -101,7 +100,6 @@ const refreshAccessToken = async () => {
     localStorage.setItem("accessToken", accessToken);
     return accessToken;
   } catch (err) {
-    // console.error("Refresh token failed", err.response?.data || err.message);
     localStorage.removeItem("accessToken");
     return null;
   }
@@ -111,155 +109,163 @@ const refreshAccessToken = async () => {
 const logoutUser = async () => {
   try {
     await api.post("/logout", {}, { withCredentials: true });
-    localStorage.removeItem("accessToken");
-    window.location.href = "/"; 
   } catch (err) {
     console.error("Logout Error:", err.response?.data || err.message);
+  } finally {
+    localStorage.removeItem("accessToken");
+    window.location.href = "/";
   }
 };
 
 // ======================= FRIENDS =======================
 
 const sendFriendRequest = async (receiverId) => {
-  const token = localStorage.getItem("accessToken");
-  if (!token) return [];
+  const headers = getAuthHeaders();
+  if (!headers) return [];
 
   try {
-    const response = await api.post("/friends/request", { receiverId });
+    const response = await api.post(
+      "/friends/request",
+      { receiverId },
+      { headers, withCredentials: true }
+    );
     return response.data;
   } catch (err) {
-    console.error("Send Friend Request Error:", err.response?.data || err.message);
-    throw err.response?.data || { message: "Failed to send friend request" };
+    const errorMsg = err.response?.data?.message || "Failed to send friend request";
+    toast.error(errorMsg, { position: "top-right", autoClose: 3000, theme: "colored" });
+    throw err;
   }
 };
 
 const acceptFriendRequest = async (requestId) => {
-
-  const token = localStorage.getItem("accessToken");
-  if (!token) return [];
+  const headers = getAuthHeaders();
+  if (!headers) return [];
 
   try {
-    const response = await api.post("/friends/accept", { requestId });
-    console.log(response);
+    const response = await api.post(
+      "/friends/accept",
+      { requestId },
+      { headers, withCredentials: true }
+    );
     return response.data;
   } catch (err) {
-    console.error("Accept Friend Request Error:", err.response?.data || err.message);
-    throw err.response?.data || { message: "Failed to accept friend request" };
+    const errorMsg = err.response?.data?.message || "Failed to accept friend request";
+    toast.error(errorMsg, { position: "top-right", autoClose: 3000, theme: "colored" });
+    throw err;
   }
 };
 
 const declineFriendRequest = async (requestId) => {
-
-  const token = localStorage.getItem("accessToken");
-  if (!token) return [];
+  const headers = getAuthHeaders();
+  if (!headers) return [];
 
   try {
-    const response = await api.post("/friends/decline", { requestId });
+    const response = await api.post(
+      "/friends/decline",
+      { requestId },
+      { headers, withCredentials: true }
+    );
     return response.data;
   } catch (err) {
-    console.error("Decline Friend Request Error:", err.response?.data || err.message);
-    throw err.response?.data || { message: "Failed to decline friend request" };
+    const errorMsg = err.response?.data?.message || "Failed to decline friend request";
+    toast.error(errorMsg, { position: "top-right", autoClose: 3000, theme: "colored" });
+    throw err;
   }
 };
 
 const getPendingRequests = async () => {
-
-  const token = localStorage.getItem("accessToken");
-  if (!token) return [];
+  const headers = getAuthHeaders();
+  if (!headers) return [];
 
   try {
-    const response = await api.get("/friends/requests");
+    const response = await api.get("/friends/requests", {
+      headers,
+      withCredentials: true,
+    });
     return response.data.data;
   } catch (err) {
-    console.error("Get Pending Requests Error:", err.response?.data || err.message);
-    throw err.response?.data || { message: "Failed to fetch pending requests" };
+    const errorMsg = err.response?.data?.message || "Failed to fetch pending requests";
+    toast.error(errorMsg, { position: "top-right", autoClose: 3000, theme: "colored" });
+    throw err;
   }
 };
 
 const getFriends = async () => {
+  const headers = getAuthHeaders();
+  if (!headers) return [];
+
   try {
-    const response = await api.get("/friends");
+    const response = await api.get("/friends", {
+      headers,
+      withCredentials: true,
+    });
     return response.data;
   } catch (err) {
-    console.error("Get Friends Error:", err.response?.data || err.message);
-    throw err.response?.data || { message: "Failed to fetch friends list" };
+    const errorMsg = err.response?.data?.message || "Failed to fetch friends list";
+    toast.error(errorMsg, { position: "top-right", autoClose: 3000, theme: "colored" });
+    throw err;
   }
 };
-
 
 // ======================= MESSAGES =======================
 
-
 // send user message
 const sendMessage = async (senderId, text) => {
-  const token = localStorage.getItem("accessToken");
+  const headers = getAuthHeaders();
+  if (!headers) return;
 
-  if (token) {
-    try {
-      const response = await api.post(
-        "/send/messages",
-        { senderId, text },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-          withCredentials: true,
-        }
-      );
-
-      console.log("Message Sent Response:", response.data);
-      return response.data;
-    } catch (err) {
-      console.error("Send Message Error:", err.response?.data || err.message);
-      throw err.response?.data || { message: "Failed to send message" };
-    }
+  try {
+    const response = await api.post(
+      "/send/messages",
+      { senderId, text },
+      {
+        headers: { ...headers, "Content-Type": "application/json" },
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (err) {
+    const errorMsg = err.response?.data?.message || "Failed to send message";
+    toast.error(errorMsg, { position: "top-right", autoClose: 3000, theme: "colored" });
+    throw err;
   }
 };
 
-
-
-
-//  get message  
+// get messages
 const getMessages = async (senderId) => {
+  const headers = getAuthHeaders();
+  if (!headers) return [];
 
-  const token = localStorage.getItem("accessToken");
-
-  if (token) {
-    try {
-      const response = await api.get(`/messages/${senderId}`);
-      return response.data;
-    } catch (err) {
-      console.error("Get Messages Error:", err.response?.data || err.message);
-      throw err.response?.data || { message: "Failed to fetch messages" };
-    }
+  try {
+    const response = await api.get(`/messages/${senderId}`, {
+      headers,
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (err) {
+    const errorMsg = err.response?.data?.message || "Failed to fetch messages";
+    toast.error(errorMsg, { position: "top-right", autoClose: 3000, theme: "colored" });
+    throw err;
   }
 };
 
-
-
-//  sendOtp  verifyOtp
+// ======================= OTP & PASSWORD =======================
 
 // send OTP
 const sendOtp = async (email) => {
-
-  console.log(email);
-  
   try {
     const response = await api.post(
       "/send/otp",
       { email },
       { withCredentials: true }
     );
-
-    console.log(response.data);
     return response.data;
   } catch (err) {
-    console.error("Send OTP Error:", err.response?.data || err.message);
-    throw err.response?.data || { message: "Failed to send otp" };
+    const errorMsg = err.response?.data?.message || "Failed to send otp";
+    toast.error(errorMsg, { position: "top-right", autoClose: 3000, theme: "colored" });
+    throw err;
   }
 };
-
 
 // Verify OTP
 const verifyOtp = async (email, otp) => {
@@ -269,17 +275,15 @@ const verifyOtp = async (email, otp) => {
       { email, otp },
       { withCredentials: true }
     );
-
-    console.log(response.data);
     return response.data;
   } catch (err) {
-    console.error("Verify Otp Error:", err.response?.data || err.message);
-    throw err.response?.data || { message: "Failed to verify Otp" };
+    const errorMsg = err.response?.data?.message || "Failed to verify Otp";
+    toast.error(errorMsg, { position: "top-right", autoClose: 3000, theme: "colored" });
+    throw err;
   }
-}
+};
 
-
-// ResetPassword
+// Reset Password
 const ResetPassword = async (email, password) => {
   try {
     const response = await api.post(
@@ -287,17 +291,15 @@ const ResetPassword = async (email, password) => {
       { email, password },
       { withCredentials: true }
     );
-
-    console.log(response.data);
     return response.data;
   } catch (err) {
-    console.error("ResetPassword Error:", err.response?.data || err.message);
-    throw err.response?.data || { message: "Failed to ResetPassword" };
+    const errorMsg = err.response?.data?.message || "Failed to Reset Password";
+    toast.error(errorMsg, { position: "top-right", autoClose: 3000, theme: "colored" });
+    throw err;
   }
-}
+};
 
-
-// sendWelcomeEmail
+// Send Welcome Email
 const sendWelcomeEmail = async (email) => {
   try {
     const response = await api.post(
@@ -305,15 +307,13 @@ const sendWelcomeEmail = async (email) => {
       { email },
       { withCredentials: true }
     );
-
-    console.log(response.data);
     return response.data;
   } catch (err) {
-    console.error("sendWelcomeEmail Error:", err.response?.data || err.message);
-    throw err.response?.data || { message: "Failed to sendWelcomeEmail" };
+    const errorMsg = err.response?.data?.message || "Failed to send Welcome Email";
+    toast.error(errorMsg, { position: "top-right", autoClose: 3000, theme: "colored" });
+    throw err;
   }
-}
-
+};
 
 export {
   loginUser,
@@ -332,5 +332,5 @@ export {
   sendOtp,
   verifyOtp,
   ResetPassword,
-  sendWelcomeEmail
+  sendWelcomeEmail,
 };
