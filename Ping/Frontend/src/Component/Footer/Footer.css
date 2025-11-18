@@ -17,6 +17,11 @@
     flex-wrap: wrap;
 }
 
+.indialogo{
+    margin-top: 2px;
+    height: 20px;
+}
+
 .footer-left-container p {
     margin: 0;
     font-size: 14px;

@@ -1,5 +1,6 @@
 import React from 'react'
 import './Footer.css' 
+import india from '../../assets/indialogo.png';
 
 const Footer = () => {
   return (
@@ -11,6 +12,7 @@ const Footer = () => {
             <p>Privacy Policy</p>
         </div>
         <div className="footer-right-container"> 
+            <img className='indialogo' src={india} alt="" />
             <p>India</p>
         </div>
     </div>
