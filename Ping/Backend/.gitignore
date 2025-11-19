@@ -1,9 +1,12 @@
-        # Node.js
-        node_modules/
-        .env
-        npm-debug.log*
-        yarn-debug.log*
-        yarn-error.log*
-        coverage/
-        dist/
-        build/
+# Node.js
+node_modules/
+.env
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+coverage/
+dist/
+build/
+
+# Project specific
+Ping/Backend/.env
