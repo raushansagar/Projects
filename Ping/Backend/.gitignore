@@ -8,5 +8,7 @@ coverage/
 dist/
 build/
 
-# Project specific
 Ping/Backend/.env
+
+# OS specific
+.DS_Store
