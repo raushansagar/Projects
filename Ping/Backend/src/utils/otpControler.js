@@ -32,18 +32,18 @@ const sendOtp = async (req, res) => {
 
     // Create transporter
     const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
-      port: 465,
-      secure: true, // true for port 465
+      host: "smtp-relay.brevo.com",
+      port: 587,
+      secure: false,
       auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS, // App P
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_KEY, 
       },
     });
 
     // Email content
     const mailOptions = {
-      from: process.env.EMAIL_USER,
+      from: process.env.SMTP_USER,
       to: email,
       subject: "🔐 Your Ping Verification Code - Secure Access",
       html: `
