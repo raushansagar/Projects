@@ -43,7 +43,7 @@ const sendOtp = async (req, res) => {
 
     // Email content
     const mailOptions = {
-      from: process.env.SMTP_USER,
+      from: process.env.EMAIL_USER,
       to: email,
       subject: "🔐 Your Ping Verification Code - Secure Access",
       html: `
